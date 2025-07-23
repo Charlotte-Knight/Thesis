@@ -1,0 +1,256 @@
+\subsection{Effective Field Theory}\label{sec:EFT}
+\subsubsection{Fermi Theory}
+
+An effective field theory (EFT) is a low-energy approximation of another theory that is capable of making accurate predictions up to a particular energy scale. For example, the weak interaction can be approximated by an EFT called Fermi theory~\cite{Fermi:1934hr} which contains no description of the \PW or \PZ bosons. In the SM, muon decay is mediated by the exchange of a \PW boson but in Fermi theory, this is calculated using a four-point interaction (see \cref{fig:muon_decay_diagrams}). 
+
+\begin{figure}
+  \centering
+  \inputtikz{Figures/Theory/EFT/muon_decay_sm.tex}
+  \hspace{1cm}
+  \inputtikz{Figures/Theory/EFT/muon_decay_fermi.tex}
+  \caption[LO Feynman Diagrams for Muon Decay in the SM and in Fermi Theory]{LO Feynman diagrams for muon decay in the SM (left) and in Fermi theory (right).}\label{fig:muon_decay_diagrams}
+\end{figure}
+
+In the SM diagram, the mediating \PW boson, which is also referred to as a \textit{propagator}, introduces a term to the matrix element:
+\begin{equation}
+  \mathcal{M} = - i \frac{g_\mn - \frac{q_\mu q_\nu}{m_\PW^2}}{q^2 - m_\PW^2 + im_\PW \Gamma_\PW} \times \cdots
+\end{equation}
+where $q$ is the four-vector of the momentum transferred by the \PW boson, $\Gamma_\PW=2.09\GeV$ is the decay width of the \PW boson, and $g_\mn$ is the Minkowski metric.
+In muon decay, $\sqrt{q^2} \ll m_\PW$ since $q^2 = m_\mu^2$ and given that $\Gamma_\PW \ll m_\PW$ as well, the propagator term is approximately:
+\begin{equation}
+  \frac{i g_\mn}{m_\PW^2}
+\end{equation}
+which, ignoring the vector indices, is a constant and can be absorbed into the coupling strength parameter of the Fermi theory, i.e.\ the theories are the same except for a factor of $1/m_\PW^2$ in the coupling strengths. The full calculation in Fermi theory predicts the decay width to be:
+\begin{equation}
+  \Gamma = \frac{G_F^2}{(\hbar c)^6}\frac{(m_\mu c^2)^5}{192 \pi^3}
+\end{equation}
+where $G_F$ is the \textit{Fermi constant} which characterizes the strength of the interaction. This can be related to the electroweak \SU{2} coupling, $g_2$, with:
+\begin{equation}
+  G_F = \frac{1}{4\sqrt{2}} \frac{g_2^2}{m_\PW^2}
+\end{equation}
+and therefore, a measurement of the muon decay width provides a relationship between the couplings of the weak interaction and the \PW boson mass. 
+
+More generally, an interaction involving a propagator can be approximated by a point interaction if $q^2 \ll \Lambda^2$ where $\Lambda$ is the mass of the propagator. Then, measurements of interactions in that energy regime can be used to place constraints on the relationship between $g$ and $\Lambda$, where $g$ is a coupling parameter for these interactions. This extends to propagators outside the SM and therefore, EFT can be used to place constraints on new physics when using measurements at an energy scale much less than the mass of the new particle. 
+
+\subsubsection{Standard Model Effective Field Theory}
+
+The Standard Model Effective Field Theory (SMEFT) extends the SM Lagrangian by adding terms of higher dimension:
+\begin{equation}
+  \LSMEFT = \LSM + \frac{1}{\Lambda} \sum_i C_i^{(5)} O_i^{(5)} + \frac{1}{\Lambda^2} \sum_i C_i^{(6)} O_i^{(6)} + \cdots
+  \label{eq:LSMEFT}
+\end{equation}
+where $O_i^{(d)}$ are dimension-$d$ terms called \textit{operators} that contain the SM fields and are invariant under the same gauge group as the SM, and $C_i^{(d)}$ are complex numbers called \textit{Wilson coefficients} that characterize the magnitude of each operator's contribution to \LSMEFT. Since \LSMEFT is a perturbative expansion, it requires that $C_i / \Lambda^d < \mathcal{O}(1)$ for all $C_i$.
+
+We neglect all operators that violate lepton-number or baryon-number conservation and any operators that are dimension-7 or higher since they are suppressed by higher orders of $1 / \Lambda$. At dimension five, one operator remains which generates a Majorana mass term for neutrinos, and we also neglect this. The rest of this section will focus on the remaining dimension-6 terms which we denote by \Lsix.
+
+We use a non-redundant basis for the operators called the Warsaw basis~\cite{Grzadkowski:2010es}. The basis definition is written in \cref{tab:Warsaw_basis}, using the following notation:
+\begin{align}
+  \tilde{X}^\mn &= \frac{1}{2} \epsilon^{\mn\rho\sigma} X_{\rho\sigma}, \quad &&H^\dag i \overleftrightarrow{D} H = H^\dag (i D_\mu H) - (i D_\mu H^\dag) H, \\
+  \sigma^\mn &= \frac{i}{2} [\gamma^\mu, \gamma^\nu], &&H^\dag i \overleftrightarrow{D}^i H = H^\dag \sigma^i (i D_\mu H) - (i D_\mu H^\dag) \sigma^i H .
+\end{align}
+
+\input{Figures/Theory/EFT/Warsaw_basis.tex}
+
+In \cref{tab:Warsaw_basis}, there are 59 independent operators and naively, one might expect therefore, that there are only 59 Wilson coefficients that need to be measured to specify the theory. However, some operators carry flavour indices of which all combinations need to be summed over:
+\begin{equation}
+  \Lsix = \frac{1}{\Lambda^2} \sum_i \sum^3_{p,r=1} C_{i,pr} Q_{i,pr} + \cdots
+  \label{eq:smeft_flavour_combinations}
+\end{equation}
+and this leads to a higher number of Wilson coefficients. In total, there are 2599 free parameters in \Lsix, counting real and imaginary components of the Wilson coefficients separately. It is not currently possible to experimentally constrain all of these parameters simultaneously and nor will it be in the short-term future. Therefore, we use flavour assumptions to reduce the number of free parameters to a more reasonable level.
+
+\subsubsection{Flavour Assumptions}
+The most restrictive flavour assumption we can make is the symmetry of the kinetic terms: $\U{3}^5 = \U{3}_q \times \U{3}_u \times \U{3}_d \times \U{3}_l \times\U{3}_e$, where each field is assigned to a three-component representation of the associated group. In this assumption, the terms in \cref{eq:smeft_flavour_combinations} become:
+\begin{equation}
+  \mathcal{L}_6 = \frac{1}{\Lambda^2} \sum_i \sum^3_{p,r=1} C_i X_{i,pr} Q_{i,pr} + \cdots
+  \label{eq:smeft_flavour_combinations_u35}
+\end{equation}
+where the flavour structure of each operator is factored out into $X_{i,pr}$ leaving a single Wilson coefficient per operator. Under the $\U{3}^5$ flavour assumption, there are a total of 85 free parameters.
+
+If a set of measurements can distinguish an operator's effect on one flavour of fermion from another, e.g.\ by combining measurements of top-quark production and light-jet production, then we need not be so restrictive with our flavour assumption. A less restrictive option compared to $\U{3}^5$ is the so-called \topUtl assumption~\cite{Brivio:2020onw} where the quarks of the first two generations and quarks of the 3rd are described by independent fields, denoted $(q_p, u_p, d_p)$ and $(Q, t, b)$ respectively. The fermionic operators in this basis are provided in \cref{tab:topU3l_basis}. A $\U{2}^3 = \U{2}_q \times \U{2}_u \times \U{2}_d$ symmetry is imposed in the quark sector and paired with a $\U{3}^2 = \U{3}_l \times \U{3}_e$ symmetry in the lepton sector. With this flavour assumption, an operator can contribute differently to processes involving the first two generations from processes involving the third. Therefore, we can probe new physics effects that have a hierarchical structure in the quark sector. In the SMEFT interpretation described in \cref{chap:eft}, the \topUtl assumption is used.
+
+\input{Figures/Theory/EFT/topU3l_basis.tex}
+
+\subsubsection{Field Redefinitions}\label{sec:field_redefinitions}
+
+Some operators in the SMEFT generate terms that are the same form as those in \LSM and act as a simple scaling of the SM terms. For example, the kinetic terms of the physical Higgs boson field become:
+\begin{equation}
+  \LSM + \Lsix = \frac{1}{2} \partial_\mu \partial^\mu h [1-2\Delta\kappa_H] + \cdots
+\end{equation}
+where
+\begin{equation}
+  \Delta \kappa_H = \bar{C}_{H \square} - \frac{\bar{C}_{HD}}{4},\quad \text{and we define }\bar{C} \equiv \frac{v^2}{\Lambda^2} C_i .
+\end{equation}
+The original particle basis can be recovered if we redefine the Higgs boson field as:
+\begin{equation}
+  h \to [1 + \Delta\kappa_H] h
+\end{equation}
+and the effect of this is an overall scaling of the SM Higgs couplings by factors of $1 + \Delta\kappa_H$. Therefore, the Wilson coefficients, $C_{H \square}$ and $C_{HD}$ should appear in the SMEFT parameterization of any Higgs boson process.
+
+Similarly, the $Q_{HWB}$ operator introduces a kinetic mixing between the $B$ and $W^3$ fields of the form:
+\begin{equation}
+  \Lsix = -\frac{C_{HWB}}{2} \frac{v^2}{\Lambda^2} W^3_\mn B^\mn + \cdots
+\end{equation}
+which can be removed if we redefine the fields with a rotation:
+\begin{equation}
+  \begin{pmatrix}
+    W_\mu^3 \\
+    B_\mu
+  \end{pmatrix}
+  \to 
+  \begin{pmatrix}
+    1 & -\bar{C}_{HWB}/2 \\
+    -\bar{C}_{HWB}/2 & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    W^3_\mu \\
+    B_\mu
+  \end{pmatrix} .
+\end{equation}
+which leads to a shift in the Weinberg angle which is now:
+\begin{equation}
+  \tan{\theta_W} = \frac{g_1}{g_W} + \frac{1}{2} \bar{C}_{HWB} \left(1 - \frac{g_1^2}{g_W^2}\right)
+\end{equation}
+Therefore, $C_{HWB}$ introduces modifications to all couplings involving a photon or a \PZ boson.
+
+\subsubsection{Input Parameters}\label{sec:input_parameter_shifts}
+To determine the free parameters of the SM (\cref{tab:SM_free_parameters}), a sufficiently large set of independent observables, $\mathcal{O}$, must be chosen, measured, and then compared with SM predictions for the observables that are functions of the free parameters. In the SMEFT, the observables, $\mathcal{O}$, can receive contributions from higher-dimension operators, and therefore, the corresponding shifts in the SM free parameters must be calculated. For example, with the \topUtl flavour assumption, the shift in the Fermi constant is given by:
+\begin{equation}
+  \Delta G_F = 2 \bar{C}_{Hl}^{(3)} - \bar{C}_{ll}^'
+\end{equation}
+and therefore, $C_{Hl}^{(3)}$ and $C_{ll}^'$ lead to a scaling for electroweak processes in a similar way to how field redefinitions lead to a scaling in Higgs processes by $C_{H\square}$ and $C_{HD}$.
+
+In the electroweak gauge sector, there are four free parameters: $g_1, g_2, v, \lambda$ which are usually determined by using 4 observables from the set:
+\begin{equation}
+  \{\alpha_{em}, G_F, m_\PZ, m_\PW, m_\PH\} .
+\end{equation}
+The Higgs mass, $m_\PH$, is always used to fix $\lambda$, but the choice of the other three observables is free. This choice will have consequences for which SM parameters obtain shifts and this can affect the validity of an EFT parameterization. If shifts are applied to $m_\PZ$ and/or $m_\PW$, the Wilson coefficient dependence can become highly non-linear in diagrams containing the \PZ or \PW bosons as a propagator~\cite{Brivio:2021yjb} since the relevant term in the matrix element is proportional to:
+\begin{equation}
+  \frac{1}{q^2 - (m_\PV + \Delta m_\PV)^2 + i m_\PV \Gamma_V},\quad m_\PV \in \{m_\PZ, m_\PW\} .
+  \label{eq:propagator_term}
+\end{equation}
+For this reason, the \mWinput scheme is preferred where $m_\PZ$ and $m_\PW$ are fixed to their measured values. In this scheme, the electroweak parameter shifts are:
+\begin{align}
+  g_1^2 &= \hat g_1^2 \left[1+2\frac{\delta g_1}{\hat g_1}\right]\,,
+  &
+  \frac{\delta g_1}{\hat g_1}
+  &=
+   -\frac 12\left[\Delta G_F + \frac{\Delta m_Z^2}{\sin{\hat{\theta_W}}^2}\right]\,,
+  \\
+  g_W^2 &= \hat g_W^2\left[1+2\frac{\delta g_W}{\hat g_W}\right]\,,
+  &
+  \frac{\delta g_W}{\hat g_W}
+  &=
+  - \frac{\Delta G_F}{2}\,,
+  \\
+  v_T^2 &= \hat v^2\left[1+2\frac{\delta v}{\hat v}\right]\,,
+  &
+  \frac{\delta v}{\hat v}
+  &=
+  \frac{\Delta G_F}{2}\,,
+  \\
+  \lambda &= \hat\lambda\left[1-\frac{\delta \lambda}{\hat \lambda}\right]\,,
+  &
+  \frac{\delta \lambda}{\hat \lambda}
+  &=
+  -\Delta G_F-\Delta m_h^2,
+\end{align}
+where the $\hat{g}$ notation refers to the SM (unshifted) values of these parameters and $\Delta m_Z^2$ and $\Delta m_h^2$ are given by:
+\begin{gather}
+  \Delta m_Z^2 = \frac{\bar{C}_{HD}}{2} + \frac{2g_1 g_W}{g_1^2 + g_W^2}\bar{C}_{HWB} \\
+  \Delta m_h^2 = 2 \Delta \kappa_H - \frac{3}{2\lambda}\bar{C}_H .
+\end{gather}
+The \mWinput scheme is adopted in the EFT interpretation in \cref{sec:EFT}.
+
+In the Yukawa sector, the input parameters are the fermion masses, from which the Yukawa couplings are inferred. Therefore, operators that lead to fermion mass terms, propagate into shifts in the Yukawa couplings where:
+\begin{equation}
+  Y_\psi \to \hat{Y}_\psi + \delta Y_\psi, \quad \delta Y_\psi = - \frac{\Delta G_F}{2} \hat{Y}_\psi + \Delta M_\psi
+\end{equation}
+and with the \topUtl flavour assumption:
+\begin{gather}
+  \Delta M_l = \frac{1}{2} \bar{C}_{eH}^* Y_l, \quad \Delta M_{u,c} = \frac{1}{2} \bar{C}_{uH}^* Y_u, \quad \Delta M_t = \frac{1}{2} \bar{C}_{tH}^* \\
+  \Delta M_{d,s} = \frac{1}{2} \bar{C}_{dH}^* Y_d, \quad \Delta M_b = \frac{1}{2} \bar{C}_{bH}^* .
+\end{gather}
+Therefore, all $h\psi\psi$ couplings will be affected by one of $C_{eH}$, $C_{uH}$, $C_{tH}$, $C_{dH}$ or $C_{bH}$.
+
+\subsubsection{General Form for SMEFT Parameterizations}\label{sec:smeft_general_form}
+To constrain the Wilson coefficients, we need to first parameterize some observables in terms of the coefficients. Consider the matrix element, $\mathcal{M}$, for a generic process which can be expressed as:
+\begin{equation}
+  \mathcal{M} = \mathcal{M}_{SM} + \mathcal{M}_{\Lsix}
+\end{equation}
+where $\mathcal{M}_{SM}$ is the SM matrix element, and $\mathcal{M}_{\Lsix}$ is the matrix element resulting from \Lsix contributions, where the contributions can generally be split into those that generate new vertices, e.g.\ the four-point vertex for muon decay (\cref{fig:muon_decay_diagrams}), and those that modify existing vertices, e.g.\ through field redefinitions and input parameter shifts. The latter can also be interpreted as generating new vertices if the modified SM vertices are considered separately as the original SM vertex and a new vertex that represents the shift in the vertex coupling strength~\cite{Brivio:2020onw}.
+
+If we restrict ourselves to Feynman diagrams with single insertions of SMEFT vertices, the SMEFT matrix element becomes:
+\begin{equation}
+  \mathcal{M}_{\Lsix} = \frac{1}{\Lambda^2} \sum_i C_i \mathcal{M}_i
+\end{equation}
+and squaring the total matrix element and taking the ratio to $\abs{\mathcal{M}_{SM}}^2$ gives us:
+\begin{align}
+  \frac{\abs{\mathcal{M}}^2}{\abs{\mathcal{M}_{SM}}^2} &= 1 + \frac{1}{\Lambda^2} \sum_i \frac{2\operatorname{Re}(\mathcal{M}_{SM}^* \mathcal{M}_i)}{\abs{\mathcal{M}_{SM}}^2} C_i + \frac{1}{\Lambda^4} \sum_{ij} \frac{2\operatorname{Re}(\mathcal{M}_i^* \mathcal{M}_j)}{\abs{\mathcal{M}_{SM}}^2} C_i C_j. \\
+  &= 1 + \frac{1}{\Lambda^2} \sum_i \alpha_i C_i + \frac{1}{\Lambda^4} \sum_{ij} \beta_{ij} C_i C_j.
+\end{align}
+For observables, $\mathcal{O}$, like cross sections and decay widths that can be expressed as integrals of $|\mathcal{M}|^2$ over phase space, the SMEFT parameterization then takes the general quadratic form:
+\begin{equation}
+  \mu (\vec{C}) \equiv \frac{\mathcal{O}(\vec{C})}{\mathcal{O}_{SM}} = 1 + \frac{1}{\Lambda^2} \sum_i A_i C_i + \frac{1}{\Lambda^4} \sum_{ij} B_{ij} C_i C_j
+\end{equation}
+where $A_i$ and $B_{ij}$ are real constants, the sum over $i$ and $j$ are sums over all contributing Wilson coefficients, and $\mathcal{O}_{SM}$ is the SM prediction for the observable. In this thesis, $\Lambda$ is arbitrarily taken to be 1\TeV and the parameterizations and constraints presented can be obtained at a different value, $\Lambda = X$, by scaling the values by a factor of $(X/1 \TeV)^2$.
+
+\subsubsection{Gluon-Gluon Fusion Higgs Boson Production}
+In the SM, gluon-gluon fusion Higgs boson production (\ggH) is the dominant production mode for the Higgs boson (see \cref{tab:higgs_xs}). Furthermore, in BSM theories where the top-quark loop (see left of \cref{fig:ggH_feynman}) can be replaced by a loop containing a new particle, BSM contributions enter at the same order as the SM, meaning that \ggH is particularly sensitive to new physics. This process is therefore important for the SMEFT interpretation of Higgs boson measurements in \cref{chap:eft}. 
+
+\begin{figure}
+  \centering
+  \inputtikz{Figures/Theory/EFT/ggh_loop.tex}
+  \hspace{1cm}
+  \inputtikz{Figures/Theory/EFT/ggh_tree.tex}
+  \caption[LO Feynman Diagrams for \ggH Production in the SM and the SMEFT]{LO Feynman diagrams for \ggH production in the SM (left) and the SMEFT (left and right). In the SM, gluons do not directly couple to the Higgs boson so the LO diagram is loop-induced, mediated predominately by top quarks. In the SMEFT, the SM diagram is affected by contributions to the $ttG$ vertex by the $Q_{tG}$ operator. There also exists a new diagram (right) where the gluons couple directly to the Higgs boson which is possible with the introduction of $Q_{HG}$.}\label{fig:ggH_feynman}
+\end{figure}
+
+In \ggH, the \Lsix contributions from field redefinitions and input parameter shifts are given, to linear order, by: 
+\begin{align}
+  \mu_\ggH &= 1 + 2\Delta\kappa_H + \Delta G_F - 2 |\Delta M_t / Y_t| \\
+  &= 1 + \frac{1}{4} \frac{v^2}{\Lambda^2} \left(4 C_{H\square} - C_{HD} - 4 C_{Hl}^{(3)} + 2 C_{ll}^' - 4 |C_{tH}| \right) \\
+  &\approx 1 + 0.12 C_{H\square} - 0.03 C_{HD} - 0.12 C_{Hl}^{(3)} + 0.06 C_{ll}^' - 0.12 |C_{tH}|
+\end{align}
+where we have used $v = 246\GeV$ and $\Lambda = 1\TeV$. In the second group, there are contributions from $Q_{tG}$ and $Q_{HG}$:
+\begin{equation}
+  Q_{tG} = (\bar Q \sigma^{\mu\nu} T^a t) \tilde H G_{\mu\nu}^a, \quad Q_{HG} = H^\dag H\, G^a_{\mu\nu} G^{a\mu\nu} 
+\end{equation}
+which after electroweak symmetry breaking, lead to terms including:
+\begin{equation}
+  Q_{tG} = \frac{\tilde{v}}{\sqrt{2}} (\bar Q \sigma^{\mu\nu} T^a t) G_{\mu\nu}^a + \cdots, \quad Q_{HG} = {1}{2} v h G^a_\mn G^{a\mn} + \cdots
+\end{equation}
+which in turn lead to $ttg$ and $ggh$ vertices. Therefore, contributions from $Q_{tG}$ appear in the loop-induced diagram at the $ttg$ vertices, and contributions from $Q_{HG}$ arise via the introduction of a new diagram, shown in \cref{fig:ggH_feynman} (right) containing only a three-point vertex, $ggh$. The magnitude of these contributions depend on the energy of an interaction and therefore, are more easily calculated with MC simulation. The relevant details for this are left for \cref{chap:eft}.
+
+\subsubsection{Higgs Boson to Four Leptons Decay}\label{sec:h4l_eft_theory}
+The $\PH \to l^+l^-l^+l^-$ (\Hfl) decay channel, is one of the most sensitive decay channels when making measurements of the Higgs boson. Therefore, like \ggH production, it is important in the EFT interpretation of \cref{chap:eft}. At LO in the SM, this process proceeds via mediating \PZ bosons: $\PH \to ZZ^* \to 4l$, where at least one \PZ boson must be off-shell, and the other is predominately on-shell. The Feynman diagram for this is shown in \cref{fig:H4l_feynman}. As with \ggH production, the global scaling of Higgs couplings leads to the following terms:
+\begin{equation}
+  \mu_\Hfl = 1 + 0.12 C_{H\square} - 0.03 C_{HD} + \cdots
+\end{equation}
+but with \Hfl, there are no terms relating to scaling of the Yukawa couplings, and the contributions of $Q_{Hl}^3$ and $Q_{ll}^'$ are non-trivial to calculate because, as well as global scalings of the electroweak couplings, they also lead to new diagrams involving a $hZll$ vertex (see \cref{fig:H4l_feynman}). 
+
+\begin{figure}
+  \centering
+  \inputtikz{Figures/Theory/EFT/h4l_sm.tex}
+  \inputtikz{Figures/Theory/EFT/h4l_qll1.tex}
+  \caption[LO Feynman Diagram for the \Hfl Decay in the SM and a New Diagram from \Lsix Contributions]{LO Feynman diagram for the \Hfl decay in the SM (left) and a new diagram from \Lsix (right) with a $hZll$ vertex that is generated by the $Q_{Hl}^{(3)}$ and $Q_{ll}^'$ operators.}\label{fig:H4l_feynman}
+\end{figure}
+
+Further contributions arise from the $Q_{HW}$, $Q_{HB}$ and $Q_{HWB}$ operators:
+\begin{equation}
+  Q_{HW} = H^\dag H\, W^i_{\mu\nu} W^{I\mu\nu}, \quad Q_{HB} = H^\dag H\, B_{\mu\nu} B^{\mu\nu}, \quad Q_{HWB} = H^\dag \sigma^i H\, W^i_{\mu\nu} B^{\mu\nu}
+\end{equation}
+which after electroweak symmetry breaking, leads to terms involving $hZ\gamma$ and $h\gamma\gamma$ vertices. These lead to the Feynman diagrams shown in \cref{fig:H4l_feynman_za} which lead to significant enhancements of the \Hfl process where the invariant mass of an opposite-sign lepton pair, $m_{ll}$, is small. This is because the photon propagator term (\cref{eq:propagator_term}) is proportional to $1/q^2$ since the photon is massless. This can cause issues for reweighting-based approaches to calculating the $Q_{HW}$, $Q_{HB}$ and $Q_{HWB}$ contributions since these techniques rely on the assumption that only small changes to the distributions of kinematic variables occur. Furthermore, the parameterization is highly dependent on any selection placed on $m_{ll}$, meaning that consideration from the analysis selection is important. Both of these issues are discussed further in \cref{chap:eft}.
+
+\begin{figure}
+  \centering
+  \inputtikz{Figures/Theory/EFT/h4l_zgam.tex}
+  \inputtikz{Figures/Theory/EFT/h4l_gamgam.tex}
+  \caption[LO Feynman Diagrams for the \Hfl Decay that Include $hZ\gamma$ and $h\gamma\gamma$ Vertices]{LO Feynman diagrams for the \Hfl decay that include $hZ\gamma$ (left) and $h\gamma\gamma$ (right) vertices that are generated from the $Q_{HW}$, $Q_{HB}$ and $Q_{HWB}$ operators.}\label{fig:H4l_feynman_za}
+\end{figure}
+
+A further consideration in the \Hfl process, and others containing a \PW or \PZ boson propagators, is the total width, $\Gamma$, of the bosons. These acquire their own \Lsix corrections and since the propagator term (\cref{eq:propagator_term}) contains the total width, this leads to another correction to these types of processes. These so-called \textit{propagator corrections} are dominant in the on-shell regime where $q^2 \sim m_V^2$. Therefore, we can approximate their impact with the on-shell expression. In the limit $q^2 = m_V^2$, the propagator term becomes:
+\begin{equation}
+  \frac{1}{im_\PV \Gamma_\PV} = \frac{1}{i m_\PV \Gamma_\PV^{\text{SM}}} \left( 1 + \frac{\delta\Gamma_V}{\Gamma_\PV^{\text{SM}}} \right)^{-1} \approx \frac{1}{i m_\PV \Gamma_\PV^{\text{SM}}} \left( 1 - \frac{\delta\Gamma_V}{\Gamma_\PV^{\text{SM}}} \right)
+  \label{eq:propagator_expansion} 
+\end{equation}
+where the expansion is fair if $\delta\Gamma_\PV \ll \Gamma_\PV$. In the SMEFT interpretation of \cref{chap:eft}, these corrections are applied with the \SMEFTsim tool~\cite{Brivio:2020onw} which parameterizes $\delta\Gamma_\PV$ to linear order in the Wilson coefficients and then propagates this effect to the parameterization of cross sections and partial widths using the expansion in \cref{eq:propagator_expansion}.

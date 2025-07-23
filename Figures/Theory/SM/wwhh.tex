@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+  \begin{feynman}
+    \vertex (a) at (0,0) {$\PW / \PZ$};
+    \vertex (b) at (0,3.25) {$\PW / \PZ$};
+    \vertex (c) at (3.25,3.25) {\PH};
+    \vertex (d) at (3.25,0) {\PH};
+    \vertex[dot] (e) at (1.625,1.625) {};
+  
+    \diagram* {
+    (a) -- [boson] (e),
+    (b) -- [boson] (e),
+    (c) -- [scalar] (e),
+    (d) -- [scalar] (e)
+    };
+    \end{feynman}
+\end{tikzpicture}

@@ -1,0 +1,328 @@
+\ProvidesPackage{thesis}
+
+\usepackage[a4paper,left=1.2in,right=1.2in,top=45mm,bottom=35mm]{geometry}
+
+% math symbols and environmentss
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{yhmath}
+
+\usepackage{graphicx} % figures
+\usepackage{booktabs} % top, mid and bottom rules for tables
+\usepackage{bbold} % for identity matrix symbol
+\usepackage{breqn} % convenient equation related stuff
+\usepackage{pdflscape} % for making a page landscape
+\usepackage{multirow} % for multirow cells in tables
+\usepackage{xspace} % \xspace command to be used in new commands
+\usepackage{siunitx} % commands for units
+\usepackage[section]{placeins} %  command to prevent floats from crossing a barrier
+\usepackage{slashed} % for slashed characters
+\usepackage{longtable} % for tables that span multiple pages
+\usepackage{pgfplots} % for making plots in tikz
+\pgfplotsset{compat=1.8}
+\usepackage{setspace} % linespacing
+\onehalfspacing
+\usepackage{epigraph}
+
+\makeatletter
+\newenvironment{chapquote}[2][2em]
+  {\setlength{\@tempdima}{#1}%
+   \def\chapquote@author{#2}%
+   \parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
+   \itshape}
+  {\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
+
+% fancy headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[lo]{\nouppercase{\rightmark}}
+\fancyhead[re]{\nouppercase{\leftmark}}
+\fancyhead[ro,le]{\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{1pt} % header line thickness
+\cfoot{} % no footer (removes page number at bottom)
+
+% tikz for diagrams
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\usetikzlibrary{calc,positioning,shadows.blur,decorations.pathreplacing,external}
+
+% commands to externalize tikz diagram production -> faster compilation
+\tikzexternalize[prefix=tikz/]
+\usepackage{xstring}
+\newcommand{\inputtikz}[1]{
+  \StrSubstitute{#1}{/}{_}[\flatname]
+  \tikzsetnextfilename{\flatname}
+  \input{#1}
+}
+
+% citations
+\usepackage{url} % for \url command
+\usepackage[backend=biber,style=numeric-comp,sorting=none,url=true,isbn=false]{biblatex}
+\renewbibmacro{in:}{}
+\DeclareFieldFormat{title}{``{#1}"}
+\addbibresource{thesis.bib}
+
+% clearpage at end of every section
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+% referencing
+\usepackage[hidelinks]{hyperref} % hyperlinks with no boxes
+\usepackage[capitalise]{cleveref} % clever references
+\creflabelformat{equation}{#2\textup{#1}#3}
+
+%Figure and table caption style
+\usepackage[font=small, labelfont=bf, justification=justified, format=hang]{caption}
+
+% removes headers on blank pages
+\makeatletter
+\renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}%
+\thispagestyle{plain}%
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+\usepackage{subfiles}
+
+% frontmatter section
+\newcommand{\ftsection}[1]{
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+    \huge{\textbf{#1}}
+  \end{center}
+  \vspace{1cm}
+}
+
+% redefine subsection to add floatbarrier
+\pretocmd{\subsection}{\FloatBarrier}{}{}
+
+% Particle definitions
+\newcommand{\PV}{\ensuremath{\mathrm{V}}\xspace}
+\newcommand{\PZ}{\ensuremath{\mathrm{Z}}\xspace}
+\newcommand{\PW}{\ensuremath{\mathrm{W}}\xspace}
+\newcommand{\PWp}{\ensuremath{\mathrm{W}^+}\xspace}
+\newcommand{\PWm}{\ensuremath{\mathrm{W}^-}\xspace}
+\newcommand{\PWpm}{\ensuremath{\mathrm{W}^\pm}\xspace}
+\newcommand{\PWmp}{\ensuremath{\mathrm{W}^\mp}\xspace}
+\newcommand{\PH}{\ensuremath{\mathrm{H}}\xspace}
+
+\newcommand{\Pg}{\ensuremath{\mathrm{g}}\xspace}
+\newcommand{\Pq}{\ensuremath{\mathrm{q}}\xspace}
+\newcommand{\Pqt}{\ensuremath{\mathrm{t}}\xspace}
+\newcommand{\Pqb}{\ensuremath{\mathrm{b}}\xspace}
+\newcommand{\Pqc}{\ensuremath{\mathrm{c}}\xspace}
+\newcommand{\Pj}{\ensuremath{\mathrm{j}}\xspace}
+\newcommand{\Pp}{\ensuremath{\mathrm{p}}\xspace}
+
+\newcommand{\PX}{\ensuremath{\mathrm{X}}\xspace}
+\newcommand{\XZero}{\ensuremath{\PX^{(0)}}\xspace}
+\newcommand{\XTwo}{\ensuremath{\PX^{(2)}}\xspace}
+
+\newcommand{\PY}{\ensuremath{\mathrm{Y}}\xspace}
+
+\newcommand{\tauh}{\ensuremath{\tau_h}\xspace}
+
+\newcommand{\mX}{\ensuremath{m_{\PX}}\xspace}
+\newcommand{\mY}{\ensuremath{m_{\PY}}\xspace}
+\newcommand{\mH}{\ensuremath{m_{\PH}}\xspace}
+\newcommand{\mV}{\ensuremath{m_{\PV}}\xspace}
+\newcommand{\mZ}{\ensuremath{m_{\PZ}}\xspace}
+
+\newcommand{\mvis}{\ensuremath{m_{\text{vis}}}\xspace}
+\newcommand{\mtauh}{\ensuremath{m_{\tauh}}\xspace}
+
+% Lagrangians
+\newcommand{\LSM}{\ensuremath{\mathcal{L}_\mathrm{SM}}\xspace}
+\newcommand{\LQED}{\ensuremath{\mathcal{L}_\mathrm{QED}}\xspace}
+\newcommand{\LQCD}{\ensuremath{\mathcal{L}_\mathrm{QCD}}\xspace}
+\newcommand{\LEW}{\ensuremath{\mathcal{L}_\mathrm{EW}}\xspace}
+\newcommand{\LEWgauge}{\ensuremath{\mathcal{L}_\mathrm{EW}}\xspace}
+\newcommand{\LSMEFT}{\ensuremath{\mathcal{L}_\mathrm{SMEFT}}\xspace}
+\newcommand{\Lsix}{\ensuremath{\mathcal{L}_6}\xspace}
+
+% Math stuff
+\newcommand{\hc}{\text{h.c.}}
+\newcommand{\mn}{\ensuremath{\mu\nu}\xspace}
+\newcommand{\iden}{\ensuremath{\mathbb{1}}\xspace}
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\U}[1]{\ensuremath{\mathrm{U}(#1)}}
+\newcommand{\SU}[1]{\ensuremath{\mathrm{SU}(#1)}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+
+% stat stuff
+\newcommand{\CLs}{\ensuremath{\text{CL}_s}\xspace}
+\newcommand{\kdown}{\ensuremath{\kappa_{\text{down}}}\xspace}
+\newcommand{\kup}{\ensuremath{\kappa_{\text{up}}}\xspace}
+
+% Units
+\newcommand{\MeV}{\ensuremath{\,\text{Me\hspace{-.08em}V}}\xspace}
+\newcommand{\GeV}{\ensuremath{\,\text{Ge\hspace{-.08em}V}}\xspace}
+\newcommand{\TeV}{\ensuremath{\,\text{Te\hspace{-.08em}V}}\xspace}
+
+\newcommand{\fbinv}{\ensuremath{\,\textrm{fb}^{-1}}\xspace}
+\newcommand{\fb}{\ensuremath{\,\textrm{fb}}\xspace}
+\newcommand{\pb}{\ensuremath{\,\textrm{pb}\xspace}}
+\newcommand{\abinv}{\ensuremath{\,\textrm{ab}^{-1}}\xspace}
+
+% Processes
+\newcommand{\VV}{\ensuremath{\PV\PV}\xspace}
+\newcommand{\WW}{\ensuremath{\PW\PW}\xspace}
+\newcommand{\ZZ}{\ensuremath{\PZ\PZ}\xspace}
+
+\newcommand{\HH}{\ensuremath{\PH\PH}\xspace}
+\newcommand{\YH}{\ensuremath{\PY\PH}\xspace}
+\newcommand{\VH}{\ensuremath{\PV\PH}\xspace}
+\newcommand{\WH}{\ensuremath{\PW\PH}\xspace}
+\newcommand{\ZH}{\ensuremath{\PZ\PH}\xspace}
+
+\newcommand{\ggH}{\ensuremath{\Pg\Pg\PH}\xspace}
+\newcommand{\qqZH}{\ensuremath{\Pq\Pq\PZ\PH}\xspace}
+\newcommand{\ggZH}{\ensuremath{\Pg\Pg\PZ\PH}\xspace}
+\newcommand{\bbH}{\ensuremath{\Pqb\Pqb\PH}\xspace}
+\newcommand{\VBF}{\ensuremath{\text{VBF}}\xspace}
+\newcommand{\qqH}{\ensuremath{\Pq\Pq\PH}\xspace}
+
+\newcommand{\tH}{\ensuremath{\Pqt\PH}\xspace}
+\newcommand{\ttH}{\ensuremath{\Pqt\Pqt\PH}\xspace}
+\newcommand{\tHq}{\ensuremath{\Pqt\PH\Pq}\xspace}
+\newcommand{\tHW}{\ensuremath{\Pqt\PH\PW}\xspace}
+
+\newcommand{\Hgg}{\ensuremath{\PH \to \gamma\gamma}\xspace}
+\newcommand{\Htautau}{\ensuremath{\PH \to \tau\tau}\xspace}
+\newcommand{\Hbb}{\ensuremath{\PH \to \Pqb\Pqb}\xspace}
+\newcommand{\Hcc}{\ensuremath{\PH \to \Pqc\Pqc}\xspace}
+\newcommand{\Hgluglu}{\ensuremath{\PH \to \Pg\Pg}\xspace}
+\newcommand{\HZZ}{\ensuremath{\PH \to \PZ\PZ}\xspace}
+\newcommand{\HWW}{\ensuremath{\PH \to \PW\PW}\xspace}
+\newcommand{\HVV}{\ensuremath{\PH \to \PV\PV}\xspace}
+\newcommand{\Hlnulnu}{\ensuremath{\PH \to l\nu l\nu}\xspace}
+\newcommand{\HZg}{\ensuremath{\PH \to \PZ\gamma}\xspace}
+\newcommand{\Hmumu}{\ensuremath{\PH \to \mu\mu}\xspace}
+% \newcommand{\Hfl}{\ensuremath{\PH \to \PZ\PZ \to 4l}\xspace}
+\newcommand{\Hfl}{\ensuremath{\PH \to 4l}\xspace}
+\newcommand{\Hinv}{\ensuremath{\PH \to \text{inv}}\xspace}
+
+\newcommand{\Zee}{\ensuremath{\PZ \to \ee}\xspace}
+\newcommand{\ee}{\ensuremath{e^+e^-}\xspace}
+\newcommand{\mumu}{\ensuremath{\mu^+\mu^-}\xspace}
+\newcommand{\Zmumu}{\ensuremath{\PZ \to \mumu}\xspace}
+\newcommand{\Zmumug}{\ensuremath{\PZ \to \mumu\gamma}\xspace}
+
+\newcommand{\XZeroHH}{\ensuremath{\XZero \to \HH}\xspace}
+\newcommand{\XTwoHH}{\ensuremath{\XTwo \to \HH}\xspace}
+\newcommand{\XHH}{\ensuremath{\PX \to \HH}\xspace}
+\newcommand{\XYH}{\ensuremath{\PX \to \PY\PH}\xspace}
+\newcommand{\XYggHtt}{\ensuremath{\PX \to \PY(\gamma\gamma)\PH(\tau\tau)}\xspace}
+\newcommand{\XYttHgg}{\ensuremath{\PX \to \PY(\tau\tau)\PH(\gamma\gamma)}\xspace}
+\newcommand{\XYbbHgg}{\ensuremath{\PX \to \PY(\Pqb\Pqb)\PH(\gamma\gamma)}\xspace}
+\newcommand{\Ygg}{\ensuremath{\PY \to \gamma\gamma}\xspace}
+\newcommand{\Ytt}{\ensuremath{\PY \to \tau\tau}\xspace}
+\newcommand{\Ybb}{\ensuremath{\PY \to \Pqb\bar{\Pqb}}\xspace}
+\newcommand{\HHggtt}{\ensuremath{\HH \to \ggtt}\xspace}
+\newcommand{\ppXHHYggtt}{\ensuremath{\Pp\Pp \to \PX \to \PH(\PH/\PY) \to \ggtt}\xspace}
+\newcommand{\ppXYHggtt}{\ensuremath{\Pp\Pp \to \PX \to \PY\PH \to \ggtt}\xspace}
+\newcommand{\ppXHH}{\ensuremath{\Pp\Pp \to \PX \to \PH\PH}\xspace}
+\newcommand{\ppXYH}{\ensuremath{\Pp\Pp \to \PX \to \PY\PH}\xspace}
+\newcommand{\ppXHHggtt}{\ensuremath{\Pp\Pp \to \PX \to \PH\PH \to \ggtt}\xspace}
+\newcommand{\ppXHHbbgg}{\ensuremath{\Pp\Pp \to \PX \to \PH\PH \to \bbgg}\xspace}
+\newcommand{\ppXYHbbgg}{\ensuremath{\Pp\Pp \to \PX \to \PY\PH \to \bbgg}\xspace}
+
+\newcommand{\ggtt}{\ensuremath{\gamma\gamma\tau\tau}\xspace}
+\newcommand{\bbgg}{\ensuremath{\Pqb\bar{\Pqb}\gamma\gamma}\xspace}
+
+\newcommand{\ttbar}{\ensuremath{\Pqt\bar{\Pqt}}\xspace}
+\newcommand{\gjet}{\ensuremath{\gamma\text{+jets}}\xspace}
+\newcommand{\ggjet}{\ensuremath{\gamma\gamma\text{+jets}}\xspace}
+\newcommand{\ttgamma}{\ensuremath{\ttbar + \gamma}\xspace}
+\newcommand{\ttgammagamma}{\ensuremath{\ttbar + \gamma\gamma}\xspace}
+\newcommand{\vgamma}{\ensuremath{\PV + \gamma}\xspace}
+
+% Variables
+\newcommand{\pt}{\ensuremath{p_T}\xspace}
+\newcommand{\ptmiss}{\ensuremath{p_T^\text{miss}}\xspace}
+\newcommand{\MET}{\ensuremath{\text{MET}}\xspace}
+\newcommand{\ptgg}{\ensuremath{\pt^{\gamma\gamma}}\xspace}
+\newcommand{\ptH}{\ensuremath{\pt^\PH}\xspace}
+\newcommand{\ptV}{\ensuremath{\pt^\PV}\xspace}
+\newcommand{\ptHj}{\ensuremath{p_T^{\PH\Pj}}\xspace}
+\newcommand{\ptHjj}{\ensuremath{p_T^{\PH\Pj\Pj}}\xspace}
+
+\newcommand{\ET}{\ensuremath{E_T}\xspace}
+
+\newcommand{\yt}{\ensuremath{y_\Pqt}\xspace}
+\newcommand{\kl}{\ensuremath{\kappa_\lambda}\xspace}
+\newcommand{\dR}{\ensuremath{\Delta R}\xspace}
+\newcommand{\dphi}{\ensuremath{\Delta \phi}\xspace}
+\newcommand{\deta}{\ensuremath{\Delta \eta}\xspace}
+\newcommand{\dall}{\ensuremath{\Delta[\eta, \phi, R]}\xspace}
+
+\newcommand{\Dalpha}{\ensuremath{D_\alpha}\xspace}
+\newcommand{\De}{\ensuremath{D_e}\xspace}
+\newcommand{\Dm}{\ensuremath{D_\mu}\xspace}
+\newcommand{\Djet}{\ensuremath{D_{\text{jet}}}\xspace}
+
+\newcommand{\eg}{\ensuremath{e/\gamma}\xspace}
+
+\newcommand{\mgg}{\ensuremath{m_{\gamma\gamma}}\xspace}
+\newcommand{\mjj}{\ensuremath{m_{\Pj\Pj}}\xspace}
+\newcommand{\mll}{\ensuremath{m_{ll}}\xspace}
+\newcommand{\mthreefour}{\ensuremath{m_{34}}\xspace}
+
+\newcommand{\sqrtS}{\ensuremath{\sqrt{s}}\xspace}
+\newcommand{\Lint}{\ensuremath{\mathcal{L}_\text{int}}\xspace}
+
+\newcommand{\IPF}{\ensuremath{I_{\text{PF}}}\xspace}
+\newcommand{\Ich}{\ensuremath{I_{\text{ch}}}\xspace}
+\newcommand{\Iph}{\ensuremath{I_\gamma}\xspace}
+\newcommand{\In}{\ensuremath{I_{\text{n}}}\xspace}
+\newcommand{\Itk}{\ensuremath{I_{\text{tk}}}\xspace}
+
+\newcommand{\dxy}{\ensuremath{d_{xy}}\xspace}
+\newcommand{\absdxy}{\ensuremath{\abs{d_{xy}}}\xspace}
+\newcommand{\dz}{\ensuremath{d_{z}}\xspace}
+\newcommand{\absdz}{\ensuremath{\abs{d_{z}}}\xspace}
+\newcommand{\abseta}{\ensuremath{\abs{\eta}}\xspace}
+
+\newcommand{\RNINE}{\ensuremath{R_9}\xspace}
+
+\newcommand{\NLL}{\ensuremath{2\textrm{NLL}}\xspace}
+\newcommand{\dNLL}{\ensuremath{2\Delta\textrm{NLL}}\xspace}
+\newlength\cmsTabSkip\setlength{\cmsTabSkip}{1ex}
+
+% Software
+\newcommand{\MADGRAPH}{\textsc{MadGraph}\xspace}
+\newcommand{\MCATNLO}{\textsc{mc@nlo}\xspace}
+\newcommand{\MGvATNLO}{\MADGRAPH{}5\_a\MCATNLO}
+\newcommand{\SHERPA}{{\textsc{sherpa}}\xspace}
+\newcommand{\PYTHIA}{{\textsc{pythia}}\xspace}
+\newcommand{\GEANTfour}{{\textsc{Geant4}}\xspace}
+\newcommand{\SVFit}{{\textsc{svfit}}\xspace}
+\newcommand{\XGBoost}{{\textsc{xgboost}}\xspace}
+\newcommand{\PyTorch}{{\textsc{PyTorch}}\xspace}
+\newcommand{\ADAM}{{\textsc{adam}}\xspace}
+\newcommand{\COMBINE}{{\textsc{combine}}\xspace}
+\newcommand{\SCIPY}{{\textsc{scipy}}\xspace}
+\newcommand{\EFTtoObs}{{\textsc{EFT2obs}}\xspace}
+\newcommand{\SMEFTsim}{{\textsc{SMEFTsim}}\xspace}
+\newcommand{\SMEFTatNLO}{{\textsc{SMEFT@NLO}}\xspace}
+\newcommand{\rivet}{{\textsc{rivet}}\xspace}
+
+
+\newcommand{\topUtl}{{\texttt{topU3l}}\xspace}
+\newcommand{\mWinput}{\ensuremath{\{G_F, m_\PZ, m_\PW\}}\xspace}
+
+\newcommand{\BR}{\ensuremath{\mathcal{B}}\xspace}
+
+\newcommand{\akt}{anti-\ensuremath{k_T}\xspace}
+
+\newcommand{\pbw}{\ensuremath{\textrm{PbWO}_4}\xspace}
+
+\newcommand{\Etrue}{\ensuremath{E_{\mathrm{true}}}\xspace}
+\newcommand{\Eraw}{\ensuremath{E_{\rm{SC}}}\xspace}
+
+\newcommand{\NA}{---}

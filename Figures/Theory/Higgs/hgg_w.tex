@@ -1,0 +1,9 @@
+\feynmandiagram [horizontal=f1 to c] {
+  i1 -- [boson, edge label'=$\gamma$] a,
+  i2 -- [boson, edge label=$\gamma$] b, 
+  a -- [boson, edge label'=\PW] b,
+  a -- [boson, edge label=\PW] c,
+  b -- [boson, edge label'=\PW] c,
+  c -- [scalar, edge label'=\PH] f1,
+  i1 -- [opacity=0] i2
+};

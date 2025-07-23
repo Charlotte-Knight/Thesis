@@ -1,0 +1,9 @@
+\feynmandiagram [horizontal=c to f1] {
+ i1 [particle=$g$] -- [gluon] a [dot, label=$Q_{tG}$],
+ i2 [particle=$g$] -- [gluon] b,
+ a -- [fermion, edge label'=$t$] b,
+ a -- [fermion, edge label=$t$] c,
+ b -- [fermion, edge label'=$t$] c,
+ c -- [scalar] f1 [particle=\PH],
+ i1 -- [opacity=0] i2
+};

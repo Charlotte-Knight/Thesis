@@ -1,0 +1,11 @@
+\feynmandiagram [horizontal=c to d] {
+    i1 [particle=\Pg] -- [gluon] a,
+    i2 [particle=\Pg] -- [gluon] b,
+    a -- [fermion] b,
+    a -- [anti fermion] c,
+    b -- [fermion] c,
+    c -- [scalar, edge label=\PH] d [label=right:\;\lambda],
+    d -- [scalar] f1 [particle=\PH],
+    d -- [scalar] f2 [particle=\PH],
+    i1 -- [opacity=0] i2
+};

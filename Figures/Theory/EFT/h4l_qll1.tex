@@ -1,0 +1,11 @@
+\feynmandiagram [horizontal=i1 to a] {
+ i1 [particle=\PH] -- [scalar] a [dot, label={\hspace{-1.5cm}$Q_{Hl}^{(3)}, Q_{ll}^'$}],
+ a -- [boson, edge label=\PZ] b,
+ a -- [anti fermion] f1 [particle=$l^+$],
+ a -- [anti fermion] f2 [particle=$l^-$],
+ b -- [anti fermion] f3 [particle=$l^+$],
+ b -- [anti fermion] f4 [particle=$l^-$],
+ f2 -- [opacity=0] f3,
+ f1 -- [opacity=0] f2,
+ f3 -- [opacity=0] f4,
+};

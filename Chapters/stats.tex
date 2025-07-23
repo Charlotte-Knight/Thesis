@@ -1,0 +1,154 @@
+\chapter{Statistical Procedures}\label{chap:stats}
+
+In \cref{chap:dihiggs}, a search is performed for the \ppXHHYggtt (di-Higgs) process, and in \cref{chap:eft}, measurements of the STXS (\cref{sec:higgs_pheno}) are interpreted in the SMEFT (\cref{sec:EFT}). Statistical tests are performed to determine the compatibility of the data with both the SM and, in the case of \cref{chap:dihiggs}, with the presence of new resonances leading to a \ggtt final state, or in the case of \cref{chap:eft}, with the presence of new physics originating from one or more \Lsix operators. Practically, these tests are performed using the \COMBINE framework~\cite{CMS:2024onh}, which is a publicly-available software package designed by the CMS collaboration. A full description of this package is found in Ref.~\cite{CMS:2024onh} and this chapter summarizes the details that are relevant to \cref{chap:dihiggs,chap:eft}.
+
+The construction of likelihood functions is described in \cref{sec:ggtt_stats_likelihood}. The determination of p-values (and significances) that provide numerical measures of the compatibility of the data is described in \cref{sec:stats_significance}. The determination of upper limits on the cross section of the di-Higgs process is described in \cref{sec:stats_limits}, and the estimation of confidence intervals for the Wilson coefficients of the SMEFT is described in \cref{sec:stats_mle}. Lastly, a short description of $\chi^2$ fits is also given in \cref{sec:stats_chi2}.
+
+\section{Likelihood Function}\label{sec:ggtt_stats_likelihood}
+
+To make statistical inferences from some data, first a statistical model, $p(\text{data};\vec{\Phi})$, is constructed that describes the probability of observing the data given the model parameters, $\vec{\Phi}$. Model parameters are divided into two categories: parameters of interest (POIs), $\vec{\mu}$, and nuisance parameters, $\vec{\nu}$. In this thesis, the primary POIs are the cross section of the di-Higgs process, or the Wilson coefficients of the SMEFT, and the nuisance parameters model systematic uncertainties, such as the uncertainty in the measurement of the LHC luminosity at the CMS experiment. The data is summarized by a set of primary observables, $\vec{x}$, and a set of auxiliary observables, $\vec{y}$. The primary observables are those that are intended to constrain $\vec{\mu}$, and the auxiliary observables are those related to the systematic uncertainties where each nuisance parameter is associated with a particular auxiliary observable.
+
+The statistical model is given by:
+\begin{equation}
+  p(\vec{x},\vec{y};\vec{\Phi}) = p(\vec{x};\vec{\mu},\vec{\nu}) \prod_k p_k(y_k;\nu_k), 
+  \label{eq:statistical_model}
+\end{equation}
+where $p(\vec{x};\vec{\mu},\vec{\nu})$ and $p_k(y_k;\nu_k)$ are the probability distributions for the primary and auxiliary observables respectively. Then, for a set of independently distributed observables, $\{\vec{x}_d\}$, a likelihood function is given by:
+\begin{equation}
+  \mathcal{L}(\vec{\Phi}) = \prod_d p(\vec{x}_d;\vec{\mu},\vec{\nu}) \prod_k p_k(y_k;\nu_k),
+  \label{eq:general_likelihood}
+\end{equation}
+where $d$ labels the entries in the dataset. An element of $\vec{x}$ could be the event count in an analysis category, or the value of a continuous variable. These elements are treated as statistically independent so that $p(\vec{x};\vec{\mu},\vec{\nu})$ can be expressed as:
+\begin{equation}
+  p(\vec{x};\vec{\mu},\vec{\nu}) = \prod_i p_i(x_i;\vec{\mu},\vec{\nu})
+\end{equation}
+where $p_i$ is the probability density function (pdf) for the observable $x_i$. Constructing the likelihood then becomes a task of determining $p_k(y_k;\nu_k)$ and $p_i(x_i;\vec{\mu},\vec{\nu})$, where the form of $p_i(x_i;\vec{\mu},\vec{\nu})$ depends on the type of analysis being performed.
+
+\subsection{Counting Analyses}\label{sec:stats_counting_analysis}
+
+The simplest type of analysis is a counting analysis in a single category, where the primary observable is the observed number of events, $n$. In this case, $p(x;\vec{\mu},\vec{\nu})$ is a Poisson distribution, and the likelihood is given by:
+\begin{equation}
+  \mathcal{L}(\vec{\Phi}) = \lambda(\vec{\mu},\vec{\nu})^n \frac{e^{-\lambda(\vec{\mu},\vec{\nu})}}{n!} \prod_k p_k(y_k;\nu_k).
+\end{equation}
+In an analysis without systematic uncertainties where there is an expected number of signal and background events, $s$ and $b$, and where the only parameter of interest is a signal strength, $\mu$, that scales the expected number of signal events, the natural log of the likelihood is given by:
+\begin{equation}
+  \ln\mathcal{L}(\mu) = n \ln(\mu s + b) - (\mu s + b) - \ln(n!).
+\end{equation} 
+Expanding this to more than one category with observed counts, $n_i$, and expected signal and background counts, $s_i$ and $b_i$, this likelihood becomes:
+\begin{equation}
+  \ln\mathcal{L}(\mu) = \sum_i n_i \ln(\mu s_i + b_i) - (\mu s_i + b_i) - \ln(n_i!)
+  \label{eq:counting_likelihood}
+\end{equation}
+where $\mu$ scales the expected signal counts in each category equally. \Cref{eq:counting_likelihood} is the likelihood used for a simplified upper limit calculation that is described in \cref{sec:cat_optim} and used in the development of the di-Higgs search in \cref{chap:dihiggs}.
+
+\subsection{Shape Analyses}\label{sec:stats_shape_analysis}
+More sensitive results can be obtained by using choosing primary observables that go beyond the number of events in a category. For this reason, the final results extraction in the di-Higgs search uses the invariant mass of the selected diphoton candidate, \mgg, of every event in one or more categories as the primary observables. The shape of an \mgg distribution is described by an analytical function, $f_{pc}(\mgg,\vec{\mu},\vec{\nu})$, which is the probability density function for \mgg for a process, $p$, in a category, $c$. The probability density function for the primary observables, $p(\vec{x};\vec{\mu},\vec{\nu})$, takes into account the relative contributions of each process in a category, and sums over all categories, and is given by:
+\begin{equation}
+  p(\vec{x};\vec{\mu},\vec{\nu}) = \sum_{p,c} \frac{\lambda_{pc}(\vec{\mu}, \vec{\nu}) f_{pc}(\mgg;\vec{\mu},\vec{\nu})}{\sum_{p,c} \lambda_{pc}(\vec{\mu},\vec{\nu})}
+  \label{eq:parametric_p_x}
+\end{equation}
+where $\lambda_{pc}(\vec{\mu},\vec{\nu})$ is the expected number of events for a process, $p$, in category, $c$. Finally, for a dataset of $n$ events, a Poisson term, $\mathcal{P}(n;\sum_p \lambda_p(\vec{\mu},\vec{\nu}))$, is also added to the likelihood of \cref{eq:general_likelihood}.  
+
+\subsection{Systematic Uncertainties}\label{sec:stats_systematics}
+In the \COMBINE framework, the probability densities for the auxiliary observables, $p_k(y_k;\nu_k)$, are given by normal, Poisson, and uniform distributions, depending on the auxiliary observable~\cite{CMS:2024onh}. In the di-Higgs search in \cref{chap:dihiggs}, only normal distributions:
+\begin{equation}
+  p(y;\nu) = N(y;\nu,\sigma_\nu) = \frac{1}{\sigma_\nu\sqrt{2\pi}}\exp\left(-\frac{(y-\nu)^2}{2\sigma_\nu^2}\right)
+\end{equation}
+are used. By default, $y$ is set to zero so that $\nu=0$ is the most likely value of the nuisance parameter based upon $p(y;\nu)$ alone. This is also referred to as the nominal value of the nuisance parameter.  
+
+For a process $p$, and category $c$, the expected number of events for a process, $\lambda_{pc}({\vec{\mu},\vec{\nu}})$, is factorized into a component related to the POIs, and components related to the nuisance parameters:
+\begin{equation}
+  \lambda_{pc}(\vec{\mu},\vec{\nu}) = g_{pc}(\vec{\mu}) \sum_k h_{pck}(\nu_k)
+  \label{eq:lambda_definition}
+\end{equation}
+where $\vec{\mu}$ and $\vec{\nu}$ are assumed to be statistically independent. For a given set of $\vec{\mu}$ values, the $g(\vec{\mu})$ component, represents the nominal value of the expected number of events, e.g.\ in an analysis where the LHC luminosity is part of the measurement, the calculation of $g(\vec{\mu})$ assumes the best-fit value for the luminosity from the auxiliary measurement. Then, the $h(\nu)$ components encode how $\lambda$ should change if a nuisance parameter is shifted from their nominal values, and these components are approximated by:
+\begin{equation}
+  h(\nu) = \begin{cases}
+    \kup^\nu & \text{if } \nu > 0.5 \\
+    \kdown^{-\nu} & \text{if } \nu < -0.5 \\
+    \exp(\nu K(\kup,\kdown,\nu)) & \text{otherwise}
+  \end{cases}
+  \label{eq:kappa_definition}
+\end{equation}
+where $K$ takes a form~\cite{CMS:2024onh} such that the first and second derivatives of $h(\nu)$ are continuous for all values of $\nu$ and that when $\kappa = \kdown = 1/\kup$, the form reduces to:
+\begin{equation}
+  h(\nu) = \kappa^\nu.
+\end{equation}
+The values of $\kup$ and $\kdown$ are taken from the impact that the nuisance parameter has on the rate of the process at $\nu=-1$ and $\nu=1$, where a value of $\nu=0$ represents no impact at all. For example, if the LHC luminosity measurement is $X^{+10\%}_{-5\%}$, then for a nuisance that encodes this uncertainty, $\kup=1.1$ and $\kdown=0.95$.
+
+In shape analyses, the dependence of the distribution's shapes on the nuisances parameters must also be encoded. In the di-Higgs search, this is achieved by first fitting an analytical function, $f(\mgg;\vec{\mu},\vec{\Psi})$, to the simulated events where the nuisance parameters, $\nu_k$, are at their nominal values. The fitted shape parameters, $\vec{\hat{\Psi}}$, are treated as nominal values, and then the dependence of the shape parameters on the nuisance parameters are encoded by:
+\begin{equation}
+  \Psi_i = \hat{\Psi}_i (1 + \sum_k \alpha_{ik} \nu_k)
+  \label{eq:alpha_definition}
+\end{equation}
+where $\alpha_{ik}$ are determined by studying how the distributions of the simulated events change where the nuisance parameters are shifted. More details on this procedure are provided in \cref{sec:ggtt_modelling}.
+
+\section{Inference}
+\subsection{Significances}\label{sec:stats_significance}
+
+In the search for the \ppXHHYggtt process in \cref{chap:dihiggs}, there is a single parameter of interest, $\mu$, which is the cross section for the process. The significance of the observed data with respect to the background-only hypothesis is calculated using a test statistic, $q_0$, defined from the likelihood function:
+\begin{equation}
+  q_0 = \begin{cases}
+    -2 \ln \dfrac{\mathcal{L}(0, \hat{\hat{\vec{\nu}}}(0))}{\mathcal{L}(\hat{\mu}, \hat{\vec{\nu}})}  & \text{if } \hat{\mu} > 0, \\
+    0 & \text{otherwise }
+  \end{cases}
+\end{equation}
+where $\hat{\mu}$ is the maximum likelihood estimator for $\mu$, and $\hat{\hat{\vec{\nu}}}(\mu$) and $\hat{\vec{\nu}}$ are the values of $\vec{\nu}$ that maximize the likelihood assuming a specific value of $\mu$ and $\mu=\hat{\mu}$ respectively~\cite{Cowan:2010js}. A measure of the compatibility of the data with the background-only hypothesis is given by the p-value, $p_0$, which is calculated as:
+\begin{equation}
+  p_0 = \int_{q_0^{\text{obs}}}^\infty f(q_0 | 0) dq
+\end{equation}
+where $q_{\text{obs}}$ is the test statistic for the observed data, and $f(q_0|0)$ is the distribution of the test statistic determined by the generation of pseudo-data sets assuming the background-only hypothesis where the nuisance parameters are set to $\hat{\hat{\vec{\nu}}}(\mu)$ and the auxiliary observables are sampled from their probability distributions. The significance, $Z$, is then defined by the p-value according to:
+\begin{equation}
+  Z = \Phi^{-1}(1 - p_0)
+\end{equation}
+where $\Phi^{-1}$ is the inverse of the cumulative distribution of the standard normal distribution.
+
+\newpage
+
+\subsection{Limit Setting}\label{sec:stats_limits}
+To calculate upper limits on the cross section of the di-Higgs process, a different test statistic, $q(\mu)$, is used~\cite{Cowan:2010js}, which is defined by:
+\begin{equation}
+  q(\mu) = \begin{cases}
+    -2 \ln \dfrac{\mathcal{L}(\mu, \hat{\hat{\vec{\nu}}}(\mu))}{\mathcal{L}(\hat{\mu}, \hat{\vec{\nu}})}  & \text{if } 0 \leq \hat{\mu} \leq \mu, \\
+    -2 \ln\dfrac{\mathcal{L}(\mu, \hat{\hat{\vec{\nu}}}(\mu))}{\mathcal{L}(0, \hat{\hat{\vec{\nu}}}(0))} & \text{if } \hat{\mu} <0, \\
+    0 & \text{if } \hat{\mu} > \mu \\
+  \end{cases}
+\end{equation}
+and two p-values, $p_\mu$ and $p_b$, are calculated with:
+\begin{equation}
+  p_\mu = \int_{q_{\text{obs}}(\mu)}^\infty f(q(\mu)|\mu) dq
+\end{equation}
+and
+\begin{equation}
+  p_b = \int_{q_{\text{obs}}(\mu)}^\infty f(q(\mu)|0) dq
+\end{equation}
+where $f(q(\mu)|\mu)$ is the distribution of the test statistic determined by the generation of pseudo-data sets like in the calculation of a significance, except now assuming a non-zero value for $\mu$. The p-values, $p_\mu$ and $p_b$, are measures of the compatibility of the data with the signal-plus-background hypothesis, assuming a particular value of $\mu$, or assuming $\mu=0$ (background-only) respectively. 
+
+Any value of $\mu$ which has a $p_\mu < \alpha$ can then be said to be excluded at the $100(1-\alpha)$\% confidence level. However, this approach is considered too aggressive because a downward fluctuation in the background would lead to smaller values of $p_\mu$, thereby excluding a greater range of $\mu$. To counteract this, $\mu$ values are instead excluded according to the $\CLs=p_\mu / p_b$ criterion~\cite{ParticleDataGroup:2020ssz,Junk:1999kv,Read:2002hq}, and an upper limit at the $100(1-\alpha)$\% confidence level is quoted as the value of $\mu$ which satisfies $\CLs = \alpha$.
+
+Expected upper limits are calculated by first generating pseudo-data sets assuming the background-only hypothesis. Then, values of the test statistic that correspond to the 2.5, 16, 50, 85 and 97.5\% quantiles are taken from the generated distribution, and the corresponding upper limits are calculated by replacing $q_{\text{obs}}$ with these values. The upper limit for the 50\% quantile is referred to as the median expected limit.
+
+The upper limits can also be calculated without generating pseudo-data sets by relying on an asymptotic approximation for $f(q(\mu)|\mu)$ according to the prescription in Ref.~\cite{Cowan:2010js}. This is the approach taken during the category optimization in the di-Higgs search in \cref{chap:dihiggs} because for the sake of an optimization study, the approximation is good enough, and the asymptotic approach is computationally faster than generating pseudo-data sets, which is useful since the optimization requires the upper limits to recalculated thousands of times. 
+
+\subsection{Maximum Likelihood Estimates and Confidence Intervals}\label{sec:stats_mle}
+
+In the EFT interpretation of \cref{chap:eft}, the Wilson coefficients are estimated by maximizing the likelihood function, $\mathcal{L}(\vec{\mu},\vec{\nu})$, with respect to the Wilson coefficients, and confidence intervals are estimated using the profile likelihood ratio:
+\begin{equation}
+  q(\vec{\mu}) = -2 \ln \dfrac{\mathcal{L}(\vec{\mu}, \hat{\hat{\vec{\nu}}}(\vec{\mu}))}{\mathcal{L}(\hat{\vec{\mu}}, \hat{\vec{\nu}})}\label{eq:mle_test_statistic}
+\end{equation}
+where $\hat{\vec{\mu}}$ are the maximum likelihood estimates for the POIs, which are the Wilson coefficients in this case, and $\hat{\hat{\vec{\nu}}}(\vec{\mu})$ and $\hat{\vec{\nu}}$ are the values of the nuisance parameters that maximize $\mathcal{L}$ for a particular set of $\vec{\mu}$ and for the maximum likelihood estimates ($\hat{\vec{\mu}}$) respectively. In the absence of large non-Gaussian uncertainties, Wilks' theorem states that the profile likelihood ratio test statistic is approximately $\chi^2$ distributed~\cite{Wilks,Wald,Engle} with $k$ degrees of freedom, where $k$ is the number of POIs. In \cref{chap:eft}, scans of the likelihood function are performed one Wilson coefficient at a time ($k=1$) where the other Wilson coefficients are either set to zero, or left floating (are profiled). So, using Wilks' theorem, an approximate 68\% (95\%) confidence interval is given by the values of $\mu$ where $q(\vec{\mu}) = 1\ (3.84)$.
+
+\subsection[\texorpdfstring{Binned $\chi^2$ fits}{Binned chi2 Fits}]{Binned $\chi^2$ Fits}\label{sec:stats_chi2}
+In the case of a simple binned fit where there are no nuisance parameters, the likelihood function is a product of Poisson terms:
+\begin{equation}
+  \mathcal{L}(\vec{\mu}) = \prod_i \frac{1}{n_i!} \lambda_i(\vec{\mu})^{n_i} e^{-\lambda_i(\vec{\mu})}
+\end{equation}
+where $n_i$ and $\lambda_i(\vec{\mu})$ are the observed and expected number of events in bin $i$. Assuming that $\lambda$ is large ($\gtrsim10)$, a Poisson distribution can be approximated by a normal distribution with a mean and variance equal to $\lambda$:
+\begin{equation}
+  \mathcal{L} \approx \prod_i \frac{1}{\sqrt{2\pi\lambda_i(\vec{\mu})}} \exp\left(-\frac{(n_i - \lambda_i(\vec{\mu}))^2}{2\lambda_i(\vec{\mu})}\right)
+\end{equation}
+and the test statistic (\cref{eq:mle_test_statistic}) becomes:
+\begin{equation}
+  q(\vec{\mu}) \approx \chi^2(\vec{\mu}) = \sum_i \frac{(n_i - \lambda_i(\vec{\mu}))^2}{\sigma_i^2} 
+\end{equation}
+where $\sigma_i^2=\lambda_i(\vec{\mu})$ is the variance, and $\chi^2$ is referred to as the chi-squared test statistic. Often, a further approximation is made by estimating the variance from the observed number of events using $\sigma_i = \sqrt{n_i}$, which is a fair approximation when $\lambda$ is large~\cite{ParticleDataGroup:2020ssz}. This chi-squared test statistic is often used in fits to weighted simulated events where the distribution of events in each bin cannot be described by a Poisson distribution. In these fits, the variance in each bin is given by $\sigma_i^2 = \sum_j w_{ij}^2$. This type of fit is used in the \ggtt search in \cref{chap:dihiggs}, primarily to derive models of the \mgg distribution for the single and di-Higgs processes (\cref{sec:single_dihiggs_modelling}).

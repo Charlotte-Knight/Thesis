@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+  \begin{feynman}
+    \vertex (a) at (0,0) {\PW};
+    \vertex (b) at (0,3.25) {\PW};
+    \vertex (c) at (3.25,3.25) {$\gamma , \PZ$};
+    \vertex (d) at (3.25,0) {$\gamma , \PZ$};
+    \vertex[dot] (e) at (1.625,1.625) {};
+  
+    \diagram* {
+    (a) -- [boson] (e),
+    (b) -- [boson] (e),
+    (c) -- [boson] (e),
+    (d) -- [boson] (e)
+    };
+    \end{feynman}
+\end{tikzpicture}

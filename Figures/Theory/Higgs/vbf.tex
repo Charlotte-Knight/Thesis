@@ -1,0 +1,10 @@
+\feynmandiagram [horizontal=c to f3] {
+  i1 -- [fermion, edge label'=\Pq] a -- [fermion, edge label'=\Pq] f1,
+  i2 -- [fermion, edge label'=\Pq] b -- [fermion, edge label'=\Pq] f2,
+  a -- [boson, edge label=\PV] c -- [boson, edge label=\PV] b,
+  c -- [scalar, edge label=\PH] f3,
+  a -- [opacity=0] b,
+  i1 -- [opacity=0] i2,
+  f1 -- [opacity=0] f3,
+  f2 -- [opacity=0] f3
+};

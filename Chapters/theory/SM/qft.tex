@@ -1,0 +1,220 @@
+\subsection{Quantum Field Theory}\label{sec:electroweak}
+The SM can be described by a Lagrangian density, \LSM, which is a function of the particle fields and their derivatives. By applying the Euler-Lagrange equations to \LSM, we can then derive equations of motion that describe the dynamics and interactions of these fields. In this section, concepts related to QFT that will help to understand the construction of \LSM will be described. In the rest of this section, Lagrangian densities will be represented by $\mathcal{L}$ and referred to as ``Lagrangians'' (omitting ``density'').
+
+\subsubsection{Real Scalar Fields}
+One of the simplest particle theories one could write down consists of a single Lorentz real scalar field, $\phi(x,y,z,t)$, with a Lagrangian:
+\begin{equation}
+  \mathcal{L} = \frac{1}{2}\partial_\mu \phi \partial^\mu \phi - \frac{1}{2}m^2\phi^2
+\end{equation}
+and after applying the Euler-Lagrange equations:
+\begin{equation}
+  0 = \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}
+\end{equation}
+this becomes:
+\begin{equation}
+  0 = \partial_\mu \partial^\mu \phi + m^2 \phi \label{eq:klein_gordon}
+\end{equation}
+which can be identified as a relativistic wave equation, namely the Klein-Gordon equation, which describes a particle with mass $m$. In this theory, the particles are non-interacting. To introduce interactions, we need to add terms that are higher orders of \phi, for example:
+\begin{equation}
+  \mathcal{L} = \frac{1}{2}\partial_\mu \phi \partial^\mu \phi - \frac{1}{2}m^2\phi^2 + \lambda_3 \phi^3 + \lambda_4 \phi^4
+  \label{eq:scalar4}
+\end{equation}
+where $\lambda_3 \phi^3$ and $\lambda_4 \phi^4$ correspond to three-point and four-point interactions respectively. Generally, a term containing greater than two fields, including powers of the same field, corresponds to an interaction involving that combination of fields. Adding terms that have powers of $\phi$ greater than four are not allowed if one wants a renormalizable theory, i.e.\ a theory that has finite predictions at arbitrarily high energy scales~\cite{Peskin:1995ev}. Strictly speaking, a renormalizable Lagrangian must have dimensions $[\mathcal{L}] = \mathrm{GeV}^4$. Given that $[\partial_\mu \phi] = \mathrm{GeV}^2$, $[\phi] = \mathrm{GeV}$ and $[m] = \mathrm{GeV}$, this is satisfied in \cref{eq:scalar4}. 
+
+\newpage
+
+\noindent
+Regardless of renormalizability, a Lagrangian must additionally:
+\begin{enumerate}
+  \item be real since the action, $S$, which is an integral over the Lagrangian, must be real;
+  \item be a local function of the fields and their derivatives calculated at the same spacetime point;
+  \item be invariant under any symmetries of the theory.
+\end{enumerate}
+\Cref{eq:scalar4} is invariant under Poincar\'e transformations, which include translations and rotations in space, as well as Lorentz boosts. According to Noether's theorem, a continuous symmetry has a corresponding conservation law and in the case of Poincar\'e transformations, the conserved quantities are energy, momentum, and angular momentum. The full SM Lagrangian has additional symmetries which will be highlighted throughout the rest of this section.
+
+Lorentz invariance is an assumed requirement for all Lagrangians in this chapter. The condition on renormalization is also required except for effective field theories which will be discussed in \cref{sec:EFT}. 
+
+\subsubsection{Vector Fields}
+In the SM, the spin-1 force carriers are represented by vector fields. The most general Lagrangian that is Lorentz invariant and contains a real vector field is:
+\begin{equation}
+  \mathcal{L} = aS^2 + b F_\mn F^\mn + c G_\mn G^\mn + d A_\mu A^\mu
+\end{equation}
+where:
+\begin{align}
+  S &= \partial_\mu A^\mu,\quad &&\text{is a Lorentz scalar}; \\
+  F_\mn &= \partial_\mu A_\nu - \partial_\nu A_\mu,\quad &&\text{is an antisymmetric rank 2 tensor}; \label{eq:fmn} \\
+  G_\mn &= \partial_\mu A_\nu + \partial_\nu A_\mu - \frac{1}{2} \eta_\mn S,\quad &&\text{is a symmetric and traceless rank 2 tensor};
+\end{align}
+and $a, b, c$ and $d$ are arbitrary constants. If we want the Lagrangian to also be gauge invariant, meaning that it is invariant under transformations of the form:
+\begin{equation}
+  A_\mu \to A_\mu - \partial_\mu \lambda
+  \label{eq:gauge_transformation}
+\end{equation}
+where $\lambda$ is an arbitrary scalar function of spacetime, only one of the terms is viable and the most general Lagrangian is:
+\begin{equation}
+  \mathcal{L} = F_\mn F^\mn .
+\end{equation}
+This is the Maxwell Lagrangian for the free electromagnetic field.
+
+\subsubsection{Complex Scalar Fields}
+Returning to scalar fields but now considering the field to be complex, the most general Lagrangian becomes:
+\begin{equation}
+  \mathcal{L} = \partial_\mu \phi^* \partial^\mu \phi - V(\phi^*\phi)
+  \label{eq:scalar_complex}
+\end{equation}
+where the potential, $V(\phi^*\phi)$, is a polynomial of order two or less. The three-point interaction term is now missing due to the requirement that $\mathcal{L}$ be real, and the Lagrangian has a new symmetry compared to the real scalar field Lagrangian. The Lagrangian is now invariant under the rotation of a complex phase:
+\begin{equation}
+  \phi(x) \to e^{i\theta}\phi(x)
+\end{equation}
+where $\theta$ is a real number. The symmetry is called \textit{Abelian} because the transformations commute:
+\begin{equation}
+  e^{-i\theta_1}e^{-i\theta_2} = e^{-i\theta_2}e^{-i\theta_1},
+\end{equation}
+and is called a \textit{global symmetry} because the same transformation is applied at all points in spacetime, i.e.\ $\theta$ is a constant. 
+
+The Lagrangian of \Cref{eq:scalar_complex} is not invariant under a local transformation of the type:
+\begin{equation}
+  \phi(x) \to e^{i\theta(x)} \phi(x)
+  \label{eq:local_transformation}
+\end{equation}
+but an invariant Lagrangian can be created if a new vector field, $A_\mu$, is introduced which simultaneously transforms as 
+\begin{equation}
+  A_\mu(x) \to A_\mu(x) - \frac{1}{e}\partial_\mu \theta(x)
+  \label{eq:gauge_transformation_2}
+\end{equation}
+which is the same as the gauge transformation in \cref{eq:gauge_transformation} where $\lambda = \theta(x)/e$. The simultaneous transformation of $\phi$ and $A_\mu$ is referred to as a \textit{local gauge} transformation and the new vector field is known as a \textit{gauge field}. The Lagrangian is given by:
+\begin{equation}
+  \mathcal{L} = (D_\mu\phi)^* D^\mu \phi - V(\phi^*\phi)
+  \label{eq:scalar_complex_gauge}
+\end{equation}
+where the covariant derivative, $D_\mu$, is defined as:
+\begin{equation}
+  D_\mu \phi \equiv \partial_\mu \phi + ieA_\mu \phi.
+\end{equation}
+Now adding the $F_\mn F^\mn$ term (\cref{eq:fmn}), we arrive at the most general gauge invariant Lagrangian for a complex scalar field:
+\begin{equation}
+  \mathcal{L} = F_\mn F^\mn + (D_\mu\phi)^* D^\mu \phi - V(\phi^*\phi) .
+\end{equation}
+
+In the SM, local gauge symmetries are imposed on the Lagrangian which give rise to the existence of vector bosons, which are the force carriers: the gluons, photon, and the \PWpm and \PZ bosons. Given that they are related to gauge transformations, the force carriers are also referred to as \textit{gauge bosons}.
+
+\subsubsection{Non-Abelian Gauge Fields}
+The simultaneous transformation of $\phi$ and $A_\mu$ in \cref{eq:local_transformation,eq:gauge_transformation_2} is a \U{1} transformation. When generalizing to \U{N}, the Lagrangian in \cref{eq:scalar_complex_gauge} becomes:
+\begin{equation}
+  \mathcal{L} = (D_\mu\phi)^\dag D^\mu \phi - V(\phi^\dag\phi)
+\end{equation}
+where $\phi$ and $A_\mu$ transform as
+\begin{align}
+  \phi &\to M \phi \\
+  A_\mu &\to M A_\mu M^\dag + \frac{i}{g}(\partial_\mu M)M^\dag \label{eq:non_abelian_vector_transformation}
+\end{align}
+where $M(x)$ is an element of the \U{N} group. \Cref{eq:non_abelian_vector_transformation} holds if $A_\mu$ is an element of the Lie algebra, meaning that it can be written as $A_\mu = A_\mu^a T^a$ where $A_\mu^a$ are real constants, $T^a$ are the generators of some representation of the Lie algebra, and $a \in \{1,\ldots,D\}$ where $D=N^2$ is the dimensionality of \U{N}. Therefore, imposing a local \U{N} symmetry has lead to the introduction of $D$ gauge bosons, where each gauge boson is represented by a component, $A_\mu^a$. 
+
+In the non-Abelian case, the $F_\mn F^\mn$ term is no longer gauge invariant. In an attempt to find a similar term that \textit{is} gauge invariant, we redefine $F_\mn$ as:
+\begin{align}
+  F_\mn &= -\frac{i}{g} [D_\mu, D_\nu] \\
+  &= \partial_\mu A_\nu - \partial_\nu A_\mu + ig[A_\mu, A_\nu]
+\end{align}
+which is still consistent with the Abelian case since $[A_\nu, A_\nu]$ would be zero. With this definition, $F_\mn F^\mn$ is still not invariant, but its trace is. Therefore, the most general scalar field Lagrangian with a \U{N} gauge symmetry is:
+\begin{equation}
+  \mathcal{L} = -\frac{1}{2} \Tr F_\mn F^\mn + (D_\mu\phi)^\dag D^\mu \phi - V(\phi^\dag\phi).
+\end{equation}
+
+Writing the first term alone and in terms of the gauge field components, $A_\mu^a$, we find:
+\begin{align}
+  \mathcal{L} = &-\frac{1}{2} \Tr F_\mn F^\mn = - \frac{1}{4} F_\mn^a F^{\mn a} \\
+  &= -\frac{1}{4} (\partial_\mu A_\nu^a - \partial_\nu A_\mu^a) (\partial_\nu A^a_\mu) (\partial^\mu A^{\nu a} - \partial^\nu A_{\mu a}) (\partial_\nu A^a_\mu) \\
+  &+ \frac{g}{2} f^{abc} (\partial_\mu A^a_\nu - \partial_\nu A^a_\mu) A^{\mu b}A^{\nu c} - \frac{g^2}{4} f^{abc} f^{ade} A_\mu^b A_\nu^c A^{\mu d} A^{\nu e}
+\end{align}
+where the last two terms represent three-point and four-point interactions of the gauge bosons, in an analogous way to \cref{eq:scalar4}. 
+
+The conclusions reached here about non-abelian gauge fields apply to any subset of \U{N}, including \SU{N} groups which are seen in the SM.
+
+\subsubsection{Spinors}
+In addition to the Klein-Gordon equation (\cref{eq:klein_gordon}), particles that have spin $\frac{1}{2}$ must also satisfy the Dirac equation:
+\begin{equation}
+  i \gamma^\mu \partial_\mu \psi - m \psi = 0
+\end{equation}
+where $m$ is the mass of the particle, $\psi$ is the particle field, and $\gamma^\mu$ are the $4\times4$ gamma matrices~\cite{Thomson:2013zua}. 
+
+A Lorentz scalar that can be constructed out of spinor fields is $\bar{\psi} \psi$ where we have introduced the Dirac adjoint, $\bar{\psi}$, as: 
+\begin{equation}
+  \bar{\psi} \equiv \psi^\dag \gamma^0 .
+\end{equation}
+For any pair of spinors, $\psi$ and $\chi$, $\bar{\psi} \gamma^\mu \chi$ is a Lorentz vector, and for any Lorentz vector, $a_\mu$, $\bar{\psi} \slashed{a} \chi$ is a Lorentz scalar where we have introduced the Dirac slash notation:
+\begin{equation}
+  \slashed{a} \equiv \gamma^\mu a_\mu .
+\end{equation}
+This also applies when the vector is a derivative so $\bar{\psi}\slashed{\partial}\psi$ is also a Lorentz scalar.
+
+In the SM, spinors are decomposed into their left and right-handed components. To define these components, we first introduce a fifth gamma matrix:
+\begin{equation}
+  \gamma^5 = i\gamma^0 \gamma^1 \gamma^2 \gamma^3 .
+\end{equation}
+The left/right-handed component of a spinor, $\psi_{L/R}$, is given by $P_{L/R} \psi$ where:
+\begin{equation}
+  P_L = \frac{1}{2} (\iden - \gamma^5) \text{ and } P_R = \frac{1}{2}(\iden + \gamma^5) .
+\end{equation}
+Under a parity transformation, a left/right-handed spinor transforms as:
+\begin{equation}
+  \psi_{L/R} \to \gamma^0 \psi_{L/R}
+\end{equation}
+and it can be shown that $P_{L/R} (\gamma^0 \psi_{L/R}) = 0$, i.e.\ a parity transformation changes a left-handed spinor into a right-handed spinor and a right-handed spinor into a left-handed spinor. Given this transformation property, we can create a parity-violating theory by writing a Lagrangian that has different terms for $\psi_L$ than for $\psi_R$. This will be essential in describing the weak interaction that behaves differently with left and right-handed fermions.
+
+\subsubsection{Spontaneous Symmetry Breaking}
+So far, we have interpreted a field, $\phi$, in a Lagrangian as the field of a physical particle. This has the implicit assumption that a field value of zero corresponds to the vacuum state of the Lagrangian, i.e.\ the state with the lowest energy. However, this need not be the case. Consider the complex scalar Lagrangian of \cref{eq:scalar_complex}, which has a global \U{1} symmetry, with the potential:
+\begin{equation}
+  V(\phi^*, \phi) = m^2 \phi^*\phi + \frac{1}{2}\lambda (\phi^*\phi)^2 .
+  \label{eq:scalar_complex_potential}
+\end{equation}
+\begin{figure}
+  \centering
+  \scalebox{1.5}{
+   \inputtikz{Figures/Theory/SM/sombrero.tex}
+  }
+  \caption[Higgs Field Potential]{The potential of a complex scalar field, $V(\phi) = m^2 \phi^*\phi + \frac{1}{2}\lambda (\phi^*\phi)^2$, where $m^2 < 0$ and $\lambda > 0$.}\label{fig:sombrero}
+\end{figure}
+If $m^2 < 0$ and $\lambda > 0$, then the potential will look like that shown in \cref{fig:sombrero} and have a circle of minima in the complex plane at:
+\begin{equation}
+  \phi = \frac{v}{\sqrt{2}}e^{i\theta},\quad \theta \in [0, 2\pi]
+  \label{eq:phi_vacuum_state}
+\end{equation}
+where we have used the conventions, $\mu^2 = -m^2$ and $v = \mu / \sqrt{\lambda}$, where $v$ is real and referred to as the \textit{vacuum expectation value} (vev). We can choose a particular minimum, $\phi = \phi_0 = v / \sqrt{2}$, and expanding around this vacuum state we get:
+\begin{alignat}{2}
+  \phi (x) &= \frac{1}{\sqrt{2}} (v + \rho(x) ), \quad &&\rho \in \mathbb{C} \\
+  &= \frac{1}{\sqrt{2}} (v + \varphi (x) + i \chi (x) ), \quad &&\varphi,\chi \in \mathbb{R}
+\end{alignat}
+and the potential becomes:
+\begin{equation}
+  V(\phi^*, \phi) = -\frac{\mu^4}{2\lambda} + \mu^2 \varphi^2 + \frac{1}{2} \lambda v \varphi (\varphi^2 + \chi^2) + \frac{1}{8} \lambda (\varphi^2 + \chi^2)^2
+  \label{eq:scalar_complex_potential_expanded}
+\end{equation}
+where the second term is a mass term for $\varphi$ and there are no mass terms for $\chi$. By expanding around the vacuum state, we have revealed the physical particle spectrum for this Lagrangian, which is two scalar particles, $\varphi$ and $\chi$, where $m_\varphi = \sqrt{2}\mu$ and $\chi$ is massless. The massless scalar particle is known as a Goldstone boson.
+
+
+
+This Lagrangian is invariant under a global \U{1} transformation: $\phi \to e^{i\theta} \phi$, but since $e^{i\theta}\phi_0 \neq \phi_0$, this does not correspond to the analogous transformation: $\rho \to e^{i\theta} \rho$. We therefore say that the global \U{1} symmetry is \textit{spontaneously broken}. The original symmetry is still present, but not apparent now that the Lagrangian is written in terms of the physical particle fields. 
+
+We can now generalize to theories that are invariant under any symmetry group, $G$, whereby the field transforms as $\phi \to M \phi$, where $M$ is an element of the group. The symmetry is spontaneously broken if $M \phi_0 \neq \phi_0$ for any $M$, or unbroken if $M \phi_0 = \phi_0$ for all $M$. Considering an infinitesimal transformation of $\phi_0$:
+\begin{equation}
+  \phi_0 \to \phi_0 + i \theta^a T^a \phi_0
+\end{equation}
+where $T^a$ are the generators of the group, and $\theta^a$ are infinitesimally-small real constants, we identify broken generators as ones where $T \phi_0 \neq \phi_0$ and unbroken generators as ones where $T \phi_0 = \phi_0$. The set of unbroken generators corresponds to a \textit{residual symmetry group}, $H$, which is a subgroup of the original group. 
+
+When $T \phi \neq 0$ for all $T$, there may still exist linear combinations of the generators, $\hat{T}=c^a T^a$ where $\hat{T} \phi_0 = 0$. To determine these linear combinations, we first define the symmetry breaking matrix:
+\begin{equation}
+  S^{ab} = \phi_0^\dag \{T^a, T^b\} \phi_0 .
+  \label{eq:symmetry_breaking_matrix}
+\end{equation}
+For \U{N} and \SU{N} symmetry groups where $T^a$ are Hermitian, $S^{ab}$ is real and symmetric and therefore has $D$ real eigenvectors, $c_i$, with eigenvalues $\lambda_i$. It can be shown that a new generator defined as $\hat{T}^i = c_i^a T^a$, is an unbroken generator when $\lambda_i = 0$, and a broken generator when $\lambda_i \neq 0$. It can be further shown that every broken generator gives rise to a massless Goldstone particle. This is known as Goldstone's theorem~\cite{Goldstone:1962es} and holds for theories with global symmetries. To determine the particle spectra of a gauge theory, we turn to the Higgs mechanism.
+
+\subsubsection{The Higgs Mechanism}
+Consider the Lagrangian of \cref{eq:scalar_complex_gauge}, which has a local \U{1} symmetry, with the same potential as \cref{eq:scalar_complex_potential}. Now that the vector field, $A^\mu$, is introduced, the vacuum state is specified by values of $A^\mu$ and $\phi$ simultaneously. In the temporal gauge ($A^0 = 0$), this is given by \cref{eq:phi_vacuum_state} and $A_\mu = 0$.
+  
+Once again expanding the scalar field as $\phi = (v + \varphi + i \chi) / \sqrt{2}$, we regain the same potential as \cref{eq:scalar_complex_potential_expanded} and new terms from the expansion of $F_\mn F^\mn$ and $(D_\mu \phi)^* D^\mu \phi$. Writing only the quadratic terms and transforming to the unitary gauge ($\theta(x) = -\chi / v$) we find:
+\begin{equation}
+  \mathcal{L} = F_\mn F^\mn + \frac{1}{2} e^2 v^2 A_\mu A^\mu + \frac{1}{2} \partial_\mu \varphi \partial^\mu \varphi - \mu^2 \varphi^2 + \cdots
+\end{equation}
+where we can identify two distinct fields, $A_\mu$ and $\phi$, which have masses $\sqrt{2}\mu$ and $ev$ respectively. As in the global case, the \U{1} symmetry is broken, but unlike the global case, the symmetry breaking has not led to any massless particles. Instead, the originally-massless vector boson has been given a mass.
+
+When generalizing to theories that are invariant under any symmetry group, a similar conclusion is found. If there are $D$ generators of the group, where $D^'$ are broken, then there are $D^'$ massive vector particles and $D-D^'$ massless vector bosons. In the SM, this is the mechanism by which the gauge bosons of the weak force, \PWpm and \PZ, acquire mass. 

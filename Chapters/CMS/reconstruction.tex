@@ -1,0 +1,15 @@
+\section{Object Reconstruction}\label{sec:reconstruction}
+The outputs from the CMS detector, after some processing of the raw signals, are essentially, hits in the tracking systems and energy deposits in the calorimeters. To perform a physics analysis, we want to identify what physics objects were produced in the collisions and what their properties were. Physics objects include electrons, muons, taus, photons and jets. An example of an important property is the four-momentum of the object. The process of interpreting the outputs of the detector as physics objects is known as \textit{reconstruction}. 
+
+In the CMS experiment, object reconstruction begins with the particle-flow (PF) algorithm and its creation of the basic \textit{elements}: tracks and energy clusters~\cite{CMS:2017yfk}. These elements are \textit{linked} within and across detector systems to form \textit{blocks} of elements, which are then used to create object candidates. By combining information across systems, the particle-flow algorithm is able to create object candidates with great resolution and efficiency and this concept was key to the design of the algorithm. Further details on tracking, clustering and the link algorithm are provided in \cref{sec:tracking,sec:calo_clustering,sec:link_algorithm}.
+
+PF object candidates are input to specialized algorithms that complete the object reconstruction. In most cases, these algorithms are used to apply final identification criteria and calibration but in some cases, they also create more complex objects such as jets. These algorithms are described in \cref{sec:muon_reco,sec:eg_reco,sec:jet_reco,sec:tau_reco} where details are restricted to those which are most relevant to the di-Higgs search in \cref{chap:dihiggs}. 
+
+\input{Chapters/CMS/reconstruction/tracking.tex}
+\input{Chapters/CMS/reconstruction/clustering.tex}
+\input{Chapters/CMS/reconstruction/linking.tex}
+\input{Chapters/CMS/reconstruction/muon.tex}
+\input{Chapters/CMS/reconstruction/eg.tex}
+\input{Chapters/CMS/reconstruction/jets.tex}
+\input{Chapters/CMS/reconstruction/taus.tex}
+\input{Chapters/CMS/reconstruction/conclusion.tex}

@@ -1,0 +1,9 @@
+\feynmandiagram [horizontal=i1 to a] {
+ i1 -- [scalar, edge label=$a$] a,
+ a -- [anti fermion, edge label'=$\chi^+$] b,
+ a -- [fermion, edge label=$\chi^-$] c,
+ b -- [anti fermion, edge label'=$\chi^+$] c,
+ b -- [boson] f1 [particle=$\gamma$],
+ c -- [boson] f2 [particle=$\gamma$],
+ f1 -- [opacity=0] f2
+};

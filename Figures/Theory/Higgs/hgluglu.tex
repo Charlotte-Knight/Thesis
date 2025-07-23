@@ -1,0 +1,9 @@
+\feynmandiagram [horizontal=f1 to c] {
+  i1 -- [gluon, edge label'=\Pg] a,
+  i2 -- [gluon, edge label=\Pg] b, 
+  a -- [fermion, edge label'=\Pqt] b,
+  a -- [fermion, edge label=\Pqt] c,
+  b -- [fermion, edge label'=\Pqt] c,
+  c -- [scalar, edge label'=\PH] f1,
+  i1 -- [opacity=0] i2
+};
