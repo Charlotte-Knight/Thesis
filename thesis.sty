@@ -1,5 +1,8 @@
 \ProvidesPackage{thesis}
 
+% PDF/A compliance
+\usepackage[a-2b]{pdfx}
+
 \usepackage[a4paper,left=1.2in,right=1.2in,top=45mm,bottom=35mm]{geometry}
 
 % math symbols and environmentss
@@ -70,7 +73,8 @@
 \newcommand{\sectionbreak}{\clearpage}
 
 % referencing
-\usepackage[hidelinks]{hyperref} % hyperlinks with no boxes
+% \usepackage[hidelinks]{hyperref}
+\hypersetup{hidelinks} % same as \usepackage[hidelinks]{hyperref} but for pdfx
 \usepackage[capitalise]{cleveref} % clever references
 \creflabelformat{equation}{#2\textup{#1}#3}
 
