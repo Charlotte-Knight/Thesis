@@ -1,5 +1,7 @@
 # Searching for direct and indirect signatures of new physics with measurements of the Higgs boson
 
+If you're looking for help with converting your document to PDF/A, see this [README](https://github.com/Charlotte-Knight/Thesis/tree/PDF/A/PDFA) in the PDF/A [branch](https://github.com/Charlotte-Knight/Thesis/tree/PDF/A) of this repo.
+
 ##  LaTeX source code for my PhD thesis
 
 The [pdf](thesis.pdf) is built with `./build.sh` which uses latexmk, lualatex, and biber, which may be available to you if you have latex installed on your system. If not, I recommend installing full [TeX Live](https://www.tug.org/texlive/). On Ubuntu systems, you will be able to do this with
