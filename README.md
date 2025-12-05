@@ -20,7 +20,36 @@ Subsequent builds are much quicker because I use the tikz library *external* whi
 
 To students who are writing their thesis and are here for inspiration, I highly recommend using vscode and the [LaTeX](https://marketplace.visualstudio.com/items?itemName=mathematic.vscode-latex) and [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) extensions. You'll probably also want a spell-check tool such as [LTeX](https://marketplace.visualstudio.com/items?itemName=valentjn.vscode-ltex). Note that spell checking is often not perfect when writing in LaTeX so do be careful.
 
-If you do use the LaTeX Workshop extension, it can build the thesis for you instead of you running `./build.sh`. You can trigger this manually, or it automatically attempts this when saving a `.tex` file. The build 'recipe' is specified by the first line in [thesis.tex](thesis.tex#L1) but we have to tell LaTeX workshop what each step in the recipe means. This is done via the 'tools' setting for the extension. See [here](https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-tools) for the extension docs. You will need to insert the following tools
+If you do use the LaTeX Workshop extension, it can build the thesis for you instead of you running `./build.sh`. You can trigger this manually, or it automatically attempts this when saving a `.tex` file. The build 'recipe' is set by the first line in [thesis.tex](thesis.tex#L1).
+
+We have to define the recipe via the `recipes` settings for the extension (see [docs](https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-recipes)). Some of the default recipes look like this
+```
+{
+    "name": "latexmk",
+    "tools": [
+        "latexmk"
+    ]
+},
+{
+    "name": "pdflatex",
+    "tools": [
+        "pdflatex"
+    ]
+},
+```
+and we have to add this extra recipe:
+```
+{
+    "name": "lualatexmk -> biber -> lualatexmk",
+    "tools": [
+        "lualatexmk",
+        "biber",
+        "lualatexmk",
+    ]
+},
+```
+
+We also have to tell the extension what is meant by `lualatexmk` and `biber`. This is done via the `tools` setting (see [docs](https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-tools)). You will need to insert the following tools
 ```
 {
   "name": "lualatexmk",
