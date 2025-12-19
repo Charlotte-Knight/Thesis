@@ -15,30 +15,24 @@ In the 43-dimensional case, the idea is the same, and the curvature of the log-l
 
 An eigenvector decomposition is used to write $\mathcal{H}_{\text{SMEFT}} = \mathcal{R}^T \Lambda \mathcal{R}$ where $\mathcal{R}$ is a rotation matrix that defines the linear combinations of Wilson coefficients (the eigenvectors) via $\text{EV}_j = \sum_k \mathcal{R}_{jk} C_k$, and $\Lambda$ is a diagonal matrix containing the corresponding eigenvalues, $\lambda_i$, which indicate the constraining power for each eigenvector where the expected 68\% CL interval is given by $1 / \sqrt{\lambda_i}$. In the fit, combinations of Wilson coefficients with $1/\sqrt{\lambda_i} > 10$ are set to zero, therefore removing flat (or approximately flat) directions in the likelihood, and the 17 remaining eigenvectors, shown in \cref{fig:pca_rotation_matrix}, are included in the final fit. Furthermore, the impacts of the eigenvectors on the per-channel $\sigma \cdot\BR$ STXS measurements presented in \cref{fig:stxs_stage1p2_results_split} are shown in \cref{fig:smeft_parametrisation_rotated_linear_part1,fig:smeft_parametrisation_rotated_linear_part2}.
 
-\begin{landscape}
-  \begin{figure}
-    \centering
-    \hspace{-2cm}
-    \includegraphics[width=1.1\pagewidth]{Figures/EFT/HIG-21-018-Figure_018.pdf}
-    \caption[Truncated PCA Rotation Matrix]{The rotation matrix, $\mathcal{R}$, derived using the PCA procedure, truncated according to the 17 eigenvectors included in the fit to data. The values in the matrix are shown by text and a colour scale that goes from blue (negative values) to red (positive values). The left panel shows the expected 68\% CL interval given by $1/\sqrt{\lambda_i}$, where $\lambda_i$ is the eigenvalue for eigenvector $i$.}\label{fig:pca_rotation_matrix}
-  \end{figure}
-\end{landscape}
+\begin{sidewaysfigure}
+  \centering
+  % \hspace{-2cm}
+  \includegraphics[width=\pagewidth]{Figures/EFT/HIG-21-018-Figure_018.pdf}
+  \caption[Truncated PCA Rotation Matrix]{The rotation matrix, $\mathcal{R}$, derived using the PCA procedure, truncated according to the 17 eigenvectors included in the fit to data. The values in the matrix are shown by text and a colour scale that goes from blue (negative values) to red (positive values). The left panel shows the expected 68\% CL interval given by $1/\sqrt{\lambda_i}$, where $\lambda_i$ is the eigenvalue for eigenvector $i$.}\label{fig:pca_rotation_matrix}
+\end{sidewaysfigure}
 
-\begin{landscape}
-  \begin{figure}
-      \centering
-      \includegraphics[width=.9\linewidth]{Figures/EFT/HIG-21-018-Figure_019.pdf}
-      \caption[Impact of SMEFT Operators in the Rotated Basis (1)]{Impact of the eigenvectors on the STXS cross sections times branching fractions for the \Hgg, \Hfl, \Hmumu and \HZg decay channels. The eigenvectors are set to the expected symmetrized 95\% CL interval value in the profiled fit (when other eigenvectors are freely floating). The impacts are presented relative to the SM prediction and shown by filled bars for the linear parameterization only.}\label{fig:smeft_parametrisation_rotated_linear_part1}
-  \end{figure}
-\end{landscape}
+\begin{sidewaysfigure}
+  \centering
+  \includegraphics[width=0.9\pagewidth]{Figures/EFT/HIG-21-018-Figure_019.pdf}
+  \caption[Impact of SMEFT Operators in the Rotated Basis (1)]{Impact of the eigenvectors on the STXS cross sections times branching fractions for the \Hgg, \Hfl, \Hmumu and \HZg decay channels. The eigenvectors are set to the expected symmetrized 95\% CL interval value in the profiled fit (when other eigenvectors are freely floating). The impacts are presented relative to the SM prediction and shown by filled bars for the linear parameterization only.}\label{fig:smeft_parametrisation_rotated_linear_part1}
+  \end{sidewaysfigure}
 
-\begin{landscape}
-  \begin{figure}
-      \centering
-      \includegraphics[width=.9\linewidth]{Figures/EFT/HIG-21-018-Figure_020.pdf}
-      \caption[Impact of SMEFT Operators in the Rotated Basis (2)]{Impact of the eigenvectors on the STXS cross sections times branching fractions for the \Hlnulnu, \Htautau, and \Hbb decay channels. The eigenvectors are set to the expected symmetrized 95\% CL interval value in the profiled fit (when other eigenvectors are freely floating). The impacts are presented relative to the SM prediction and shown by filled bars for the linear parameterization only.}\label{fig:smeft_parametrisation_rotated_linear_part2}
-  \end{figure}
-\end{landscape}
+\begin{sidewaysfigure}
+  \centering
+  \includegraphics[width=0.9\pagewidth]{Figures/EFT/HIG-21-018-Figure_020.pdf}
+  \caption[Impact of SMEFT Operators in the Rotated Basis (2)]{Impact of the eigenvectors on the STXS cross sections times branching fractions for the \Hlnulnu, \Htautau, and \Hbb decay channels. The eigenvectors are set to the expected symmetrized 95\% CL interval value in the profiled fit (when other eigenvectors are freely floating). The impacts are presented relative to the SM prediction and shown by filled bars for the linear parameterization only.}\label{fig:smeft_parametrisation_rotated_linear_part2}
+\end{sidewaysfigure}
 
 Using these figures and the impacts in the nominal basis (\cref{fig:smeft_parametrisation_part1,fig:smeft_parametrisation_part1,fig:smeft_parametrisation_part1}), one can understand the construction of the eigenvectors and assign meaning to them. For example, the most sensitive eigenvector, $\mathrm{EV}_0$, is a combination of $C_{HG}$, which primarily affects \ggH production, and $C_{HB}$, $C_{HW}$ and $C_{HWB}$, which have the largest impact on the \Hgg branching fraction. Therefore, this eigenvector primarily affects \ggH production, specifically in the \Hgg decay channel (see \cref{fig:smeft_parametrisation_rotated_linear_part1}). It is unsurprising that this particular combination has the best expected sensitivity since inclusive measurements of \ggH and \Hgg in this combination have the smallest uncertainties when compared to other production and decay modes~\cite{CMS-PAS-HIG-21-018}. Similarly, it follows that the next eigenvector, $\mathrm{EV}_1$, primarily affects \ggH production in the other channels, and has a similar sensitivity to $\mathrm{EV}_0$.
 

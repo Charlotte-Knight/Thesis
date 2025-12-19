@@ -1,19 +1,15 @@
 %!LW recipe=lualatexmk -> biber -> lualatexmk
 
-\documentclass[11pt]{book}
+\documentclass[twoside,11pt]{book}
 
 \usepackage{thesis}
 
 \begin{document}
 
 \frontmatter
-\pagenumbering{arabic}
 \include{frontmatter}
 
-\newcounter{pagesave}
-\setcounter{pagesave}{\value{page}}
 \mainmatter
-\setcounter{page}{\value{pagesave}}
 \include{Chapters/introduction}
 \include{Chapters/theory}
 \include{Chapters/CMS}
